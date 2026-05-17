@@ -24,16 +24,6 @@ namespace mir {
 namespace fusion {
 
 void FpgaConvFuser::BuildPattern() { 
-  // calib 匹配条件，但是CALIB不需要求输入输出的shape，所以不需要inputs_teller和input_attr_teller
-  // auto inputs_teller0 = [](const Node* node) -> bool {
-  //   auto op_desc = *const_cast<Node*>(node)->stmt()->op_info();
-  //   auto input_w_name = op_desc.Input("Y").front();
-  //   auto* scope = const_cast<Node*>(node)->AsStmt().op()->scope();
-  //   auto w_shape = scope->FindVar(input_w_name)->Get<lite::Tensor>().dims();
-  //   size_t w_rank = w_shape.size();
-  //   bool res = w_rank == 2;
-  //   return res;
-  // };
 
   auto inputs_teller1 = [](const Node* node) -> bool { 
     // Conv2d + Bias 的输入输出条件，要求filter必须满足m*n*1*1
@@ -103,46 +93,58 @@ void FpgaConvFuser::BuildPattern() {
   };
 
   auto input_attr_teller = [](const Node* node) -> bool {
-    // calib 的attr条件，有scale
+    // hard swish 的attr条件，scale = 6, offset = 3, threshold = 6
     auto op_desc = *const_cast<Node*>(node)->stmt()->op_info();
-    if (op_desc.HasAttr("scale")) {
-      // std::cout << "has scale attr" << std::endl;
-      return true;
+    if (!op_desc.HasAttr("offset")) {
+      std::cout << "hard swish no offset attr" << std::endl;
+      return false;
     }
-    return false;
+    if (!op_desc.HasAttr("threshold")) {
+      std::cout << "hard swish no threshold attr" << std::endl;
+      return false;
+    }
+    if (!op_desc.HasAttr("scale")) {
+      std::cout << "hard swish no scale attr" << std::endl;
+      return false;
+    }
+    float offset = op_desc.GetAttr<float>("offset");
+    float threshold = op_desc.GetAttr<float>("threshold");
+    float scale = op_desc.GetAttr<float>("scale");
+    bool res = (std::fabs(offset - 3) < 1e-5
+                && std::fabs(threshold - 6) < 1e-5
+                && std::fabs(scale - 6) < 1e-5);
+    std::cout << "hard swish offset: " << offset << ", threshold: "
+              << threshold << ", scale: " << scale << ", res: " << res
+              << std::endl;
+    return res;
   };
 
   // create nodes.
   auto* calibInput = VarNode("Input");
-  auto* calibOutput = VarNode("Out"); // 实际上就是conv的输入，与convInput等价
+  auto* calibOutput = VarNode("CalibOutput"); // 实际上就是conv的输入，与convInput等价
 
   auto* CalibNode = OpNode("calib", "calib");
   
   // auto* convInput = VarNode("Input")->assert_is_op_input("conv2d", "Input");
   auto* convNode = OpNode("conv2d", "conv2d")->assert_node_satisfied(inputs_teller1);
-  auto* convFilter = VarNode("Filter");
-  auto* convBias = VarNode("Bias");
+  auto* convFilter = VarNode("ConvFilter");
+  auto* convBias = VarNode("ConvBias");
   // auto* Filter0_scale = VarNode("Filter0_scale")->assert_is_persistable_var();
-  auto* convOutput = VarNode("Output");
+  auto* convOutput = VarNode("ConvOutput");
 
+  auto* depthwise2dConvNode = OpNode("depthwise_conv2d", "depthwise_conv2d");
+  auto* depthwise2dConvFilter = VarNode("DepthwiseFilter");
+  auto* depthwise2dConvBias = VarNode("DepthwiseBias");
+  auto* depthwise2dConvOutput = VarNode("DepthwiseOutput");
 
-  // auto* x = VarNode("x")->assert_is_op_input(op_type_, "X");
-  // auto* W = VarNode("W")->assert_is_op_input(op_type_, "Y");
-  // auto* b = VarNode("b")->assert_is_persistable_var();
-  // auto* mul = OpNode("mul", op_type_)->assert_node_satisfied(inputs_teller0);
-  // auto* mul_out = VarNode("mul_out");
-  // auto* add =
-  //     OpNode("add", "elementwise_add")->assert_node_satisfied(inputs_teller1);
-  // auto* Out = VarNode("Out");
-  // if (op_type_ == "matmul") {
-  //   mul = OpNode("mul", op_type_)->assert_node_satisfied(input_attr_teller);
-  // } else if (op_type_ == "matmul_v2") {
-  //   mul = OpNode("mul", op_type_)->assert_node_satisfied(input_attr_teller_v2);
-  // }
+  auto* hard_swishNode = OpNode("hard_swish", "hard_swish") ->assert_node_satisfied(input_attr_teller);
+  auto* hard_swishOutput = VarNode("Output");
 
   // create topology.
   std::vector<PMNode*> CalibNode_input{calibInput};
   std::vector<PMNode*> Conv2dNode_input{calibOutput, convFilter, convBias};
+  std::vector<PMNode*> DepthwiseConv2dNode_input{convOutput, depthwise2dConvFilter, depthwise2dConvBias};
+  std::vector<PMNode*> HardSwishNode_input{depthwise2dConvOutput};
   // mul_inputs >> *mul >> *mul_out;
   CalibNode_input >> *CalibNode >> *calibOutput;
 
@@ -152,6 +154,14 @@ void FpgaConvFuser::BuildPattern() {
   CalibNode->AsIntermediate();
 
   Conv2dNode_input >> *convNode >> *convOutput;
+
+  DepthwiseConv2dNode_input >> *depthwise2dConvNode >> *depthwise2dConvOutput;
+  HardSwishNode_input >> *hard_swishNode >> *hard_swishOutput;
+
+  convOutput->AsIntermediate();
+  depthwise2dConvOutput->AsIntermediate();
+  depthwise2dConvNode->AsIntermediate();
+  hard_swishNode->AsIntermediate();
 }
 
 void FpgaConvFuser::InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) {
@@ -177,16 +187,19 @@ void FpgaConvFuser::InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) {
   auto* new_op_node = graph->GraphCreateInstructNode(fc_op, valid_places);
 
   IR_NODE_LINK_TO(matched.at("Input"), new_op_node);
-  IR_NODE_LINK_TO(matched.at("Filter"), new_op_node);
-  IR_NODE_LINK_TO(matched.at("Bias"), new_op_node);
-  // IR_NODE_LINK_TO(matched.at("Filter0_scale"), new_op_node);
-  // Filter0_scale是一个ATTR，不需要链接到新节点上
+  IR_NODE_LINK_TO(matched.at("ConvFilter"), new_op_node);
+  IR_NODE_LINK_TO(matched.at("ConvBias"), new_op_node);
+  IR_NODE_LINK_TO(matched.at("DepthwiseFilter"), new_op_node)
+  IR_NODE_LINK_TO(matched.at("DepthwiseBias"), new_op_node)
+
   IR_NODE_LINK_TO(new_op_node, matched.at("Output"));
 }
 
 cpp::OpDesc FpgaConvFuser::GenOpDesc(const key2nodes_t& matched) {
   auto* conv_info = matched.at("conv2d")->stmt()->op_info();
   auto* calib_info = matched.at("calib")->stmt()->op_info();
+  auto* depthwise_conv_info = matched.at("depthwise_conv2d")->stmt()->op_info();
+  auto* hard_swish_info = matched.at("hard_swish")->stmt()->op_info();
 
   cpp::OpDesc op_desc;
   op_desc.SetType("calib_conv2d");
@@ -196,46 +209,52 @@ cpp::OpDesc FpgaConvFuser::GenOpDesc(const key2nodes_t& matched) {
   op_desc.SetInput("Input", calib_info->Input("Input"));
 
   // 2. conv2d 的权重、bias 保持原来的变量名
-  op_desc.SetInput("Filter", conv_info->Input("Filter"));
+  op_desc.SetInput("Filter_Conv2d", conv_info->Input("Filter"));
 
   if (conv_info->HasInput("Bias") && !conv_info->Input("Bias").empty()) {
-    op_desc.SetInput("Bias", conv_info->Input("Bias"));
+    op_desc.SetInput("Bias_Conv2d", conv_info->Input("Bias"));
   }
 
+  op_desc.SetInput("Filter_Depthwise_Conv2d", depthwise_conv_info->Input("Filter"));
+  op_desc.SetInput("Bias_Depthwise_Conv2d", depthwise_conv_info->Input("Bias"));
+
   // 3. 输出使用 conv2d 的最终输出
-  op_desc.SetOutput("Output", conv_info->Output("Output"));
+  op_desc.SetOutput("Output", hard_swish_info->Output("Out"));
 
 
   // 如果 calib 的 scale 是 attr，而不是 input，也要保留
   if (calib_info->HasAttr("scale")) {
-    op_desc.SetAttr("scale", calib_info->GetAttr<float>("scale"));
-  }
-
-  if (calib_info->HasAttr("scale_vct")) {
-    op_desc.SetAttr("scale_vct",
-                    calib_info->GetAttr<std::vector<float>>("scale_vct"));
+    op_desc.SetAttr("calib_scale", calib_info->GetAttr<float>("scale"));
   }
 
   // 5. 保留 conv2d 属性
   if (conv_info->HasAttr("Filter0_scale")) {
     op_desc.SetAttr(
-        "Filter0_scale",
+        "Conv2d_Filter0_scale",
         conv_info->GetAttr<std::vector<float>>("Filter0_scale"));
   }
 
-  if (conv_info->HasAttr("Input0_scale")) {
+  if (depthwise_conv_info->HasAttr("Filter0_scale")) {
     op_desc.SetAttr(
-        "scale_in",
-        conv_info->GetAttr<std::vector<float>>("Input0_scale"));
+        "Depthwise2d_Filter0_scale",
+        depthwise_conv_info->GetAttr<std::vector<float>>("Filter0_scale"));
   }
 
-  op_desc.SetAttr("bit_length", conv_info->GetAttr<int>("bit_length"));
-  op_desc.SetAttr("dilations", conv_info->GetAttr<std::vector<int>>("dilations"));
-  op_desc.SetAttr("groups", conv_info->GetAttr<int>("groups"));
-  op_desc.SetAttr("padding_algorithm",
-                  conv_info->GetAttr<std::string>("padding_algorithm"));
-  op_desc.SetAttr("strides", conv_info->GetAttr<std::vector<int>>("strides"));
-  op_desc.SetAttr("paddings", conv_info->GetAttr<std::vector<int>>("paddings"));
+  if (depthwise_conv_info->HasAttr("Input0_scale")) {
+    op_desc.SetAttr("depthwise_scale", depthwise_conv_info->GetAttr<std::vector<float>>("Input0_scale"));
+  }
+
+  // op_desc.SetAttr("bit_length", conv_info->GetAttr<int>("bit_length"));
+  op_desc.SetAttr("dilations", depthwise_conv_info->GetAttr<std::vector<int>>("dilations"));
+  op_desc.SetAttr("groups", depthwise_conv_info->GetAttr<int>("groups"));
+  // op_desc.SetAttr("padding_algorithm",
+                  // conv_info->GetAttr<std::string>("padding_algorithm"));
+  // op_desc.SetAttr("strides", conv_info->GetAttr<std::vector<int>>("strides"));
+  // op_desc.SetAttr("paddings", conv_info->GetAttr<std::vector<int>>("paddings"));
+
+  op_desc.SetAttr("strides", depthwise_conv_info->GetAttr<std::vector<int>>("strides"));
+  op_desc.SetAttr("paddings", depthwise_conv_info->GetAttr<std::vector<int>>("paddings"));
+  // op_desc.SetAttr("strides", depthwise_conv_info->GetAttr<std::vector<int>>("strides"));
 
   return op_desc;
 }

@@ -367,7 +367,9 @@ struct SparseConvParam : ParamBase {
 struct ConvParam : ParamBase {
   lite::Tensor* x{};
   lite::Tensor* filter{};
+  lite::Tensor* depthwise_filter{nullptr};
   lite::Tensor* bias{nullptr};
+  lite::Tensor* depthwise_bias{nullptr};
   lite::Tensor* residualData{nullptr};
   lite::Tensor* second_x{nullptr};
   lite::Tensor* output{};

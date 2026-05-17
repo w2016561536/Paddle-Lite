@@ -71,17 +71,21 @@ class CalibConv2dOpLite : public OpLite {
   // TODO(Superjomn) replace framework::OpDesc with a lite one.
   bool AttachImpl(const cpp::OpDesc& op_desc, lite::Scope* scope) override {
     auto Input = op_desc.Input("Input").front();
-    auto Filter = op_desc.Input("Filter").front();
-    auto Bias = op_desc.Input("Bias").front();
+    auto Filter = op_desc.Input("Filter_Conv2d").front();
+    auto Filter1 = op_desc.Input("Filter_Depthwise_Conv2d").front();
+    auto Bias = op_desc.Input("Bias_Conv2d").front();
+    auto Bias1 = op_desc.Input("Bias_Depthwise_Conv2d").front();
     auto Out = op_desc.Output("Output").front();
 
     param_.x = scope->FindVar(Input)->GetMutable<lite::Tensor>();
     param_.filter = scope->FindVar(Filter)->GetMutable<lite::Tensor>();
+    param_.depthwise_filter = scope->FindVar(Filter1)->GetMutable<lite::Tensor>();
     param_.bias = scope->FindVar(Bias)->GetMutable<lite::Tensor>();
+    param_.depthwise_bias = scope->FindVar(Bias1)->GetMutable<lite::Tensor>();
     param_.output = scope->FindVar(Out)->GetMutable<lite::Tensor>();
-    CHECK(param_.x);
-    CHECK(param_.filter);
-    CHECK(param_.output);
+    // CHECK(param_.x);
+    // CHECK(param_.filter);
+    // CHECK(param_.output);
     input_tensor_ptrs_cache_.push_back(param_.x);
     output_tensor_ptrs_cache_.push_back(param_.output);
 
@@ -104,91 +108,6 @@ class CalibConv2dOpLite : public OpLite {
         }
       }
     }
-    if (std::find(input_arg_names.begin(),
-                  input_arg_names.end(),
-                  "ResidualData") != input_arg_names.end()) {
-      auto res_data_arguments = op_desc.Input("ResidualData");
-      if (res_data_arguments.size() > 0) {
-        auto residual_data_var = scope->FindVar(res_data_arguments.front());
-        if (residual_data_var != nullptr) {
-          param_.residualData = const_cast<lite::Tensor*>(
-              &(residual_data_var->Get<lite::Tensor>()));
-        }
-      }
-    }
-
-    if (op_desc.HasAttr("with_act") && op_desc.GetAttr<bool>("with_act")) {
-      param_.activation_param.has_active = true;
-      auto act_type = op_desc.GetAttr<std::string>("act_type");
-      if (act_type == "relu") {
-        param_.activation_param.active_type = lite_api::ActivationType::kRelu;
-        param_.fuse_relu = true;
-      } else if (act_type == "sigmoid") {
-        param_.activation_param.active_type =
-            lite_api::ActivationType::kSigmoid;
-        param_.fuse_sigmoid = true;
-      } else if (act_type == "tanh") {
-        param_.activation_param.active_type = lite_api::ActivationType::kTanh;
-        param_.fuse_tanh = true;
-      } else if (act_type == "swish") {
-        param_.activation_param.swish_scale =
-            op_desc.GetAttr<float>("swish_scale");
-        param_.activation_param.active_type = lite_api::ActivationType::kSwish;
-        param_.fuse_swish = true;
-      } else if (act_type == "abs") {
-        param_.activation_param.active_type = lite_api::ActivationType::kAbs;
-        param_.fuse_abs = true;
-      } else if (act_type == "relu6") {
-        param_.activation_param.active_type = lite_api::ActivationType::kRelu6;
-        param_.activation_param.Relu_clipped_coef =
-            op_desc.GetAttr<float>("fuse_brelu_threshold");  // 6.f
-      } else if (act_type == "leaky_relu") {
-        param_.activation_param.active_type =
-            lite_api::ActivationType::kLeakyRelu;
-        param_.activation_param.Leaky_relu_alpha =
-            op_desc.GetAttr<float>("leaky_relu_alpha");
-      } else if (act_type == "hard_swish") {
-        param_.activation_param.active_type =
-            lite_api::ActivationType::kHardSwish;
-        param_.activation_param.hard_swish_threshold =
-            op_desc.GetAttr<float>("hard_swish_threshold");
-        param_.activation_param.hard_swish_scale =
-            op_desc.GetAttr<float>("hard_swish_scale");
-        param_.activation_param.hard_swish_offset =
-            op_desc.GetAttr<float>("hard_swish_offset");
-      } else if (act_type == "hard_sigmoid") {
-        param_.activation_param.active_type =
-            lite_api::ActivationType::kHardSigmoid;
-        param_.activation_param.hard_sigmoid_slope =
-            op_desc.GetAttr<float>("slope");
-        param_.activation_param.hard_sigmoid_offset =
-            op_desc.GetAttr<float>("offset");
-      } else if (act_type == "prelu") {
-        param_.activation_param.active_type = lite_api::ActivationType::kPRelu;
-        param_.activation_param.Prelu_mode =
-            op_desc.GetAttr<std::string>("prelu_mode");
-        auto prelu_alpha_name = op_desc.Input("Prelu_alpha").front();
-        auto prelu_alpha_var = scope->FindVar(prelu_alpha_name);
-        param_.activation_param.Prelu_alpha =
-            const_cast<lite::Tensor*>(&(prelu_alpha_var->Get<lite::Tensor>()));
-      } else {
-        LOG(FATAL) << "The fused conv only supports fuse with relu, leaky "
-                      "relu, hard_swish, while the given activation type is "
-                   << act_type;
-      }
-    }
-    if (op_desc.HasAttr("scale_activation_type")) {
-      param_.scale_activation_type =
-          op_desc.GetAttr<std::string>("scale_activation_type");
-    }
-
-    if (op_desc.HasAttr("fuse_elementwise_op_type")) {
-      param_.fuse_elementwise_op_type =
-          op_desc.GetAttr<std::string>("fuse_elementwise_op_type");
-      auto X = op_desc.Input("SecondInput").front();
-      param_.second_x =
-          const_cast<lite::Tensor*>(&(scope->FindVar(X)->Get<lite::Tensor>()));
-    }
 
     if (op_desc.HasAttr("padding_algorithm")) {
       padding_algorithm_ = op_desc.GetAttr<std::string>("padding_algorithm");
@@ -209,30 +128,6 @@ class CalibConv2dOpLite : public OpLite {
             op_info->GetOutputScale(output_scale_name, true)[0];
       }
     }
-
-#ifdef LITE_WITH_FPGA
-    if (op_info != nullptr && op_info->HasAttr("fpga_static_quant")) {
-      param_.enable_int8 = op_info->GetAttr<bool>("fpga_static_quant");
-      auto input_scale_name = "Input0_scale";
-      if (op_info->HasInputScale(input_scale_name, true)) {
-        param_.input_scale = op_info->GetInputScale(input_scale_name, true)[0];
-      }
-    }
-#endif
-
-#ifdef LITE_WITH_FPGA
-    if (std::find(input_arg_names.begin(), input_arg_names.end(), "Scale") !=
-        input_arg_names.end()) {
-      auto scale_arguments = op_desc.Input("Scale");
-      if (scale_arguments.size() > 0) {
-        auto scale_var = scope->FindVar(scale_arguments.front());
-        if (scale_var != nullptr) {
-          param_.scale =
-              const_cast<lite::Tensor*>(&(scale_var->Get<lite::Tensor>()));
-        }
-      }
-    }
-#endif
 
     // conv3d: 3-pad to 6-pad, or conv2d: 2-pad to 4-pad
     if (paddings.size() == 2L || paddings.size() == 3L) {
