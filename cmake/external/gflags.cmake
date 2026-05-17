@@ -61,9 +61,11 @@ IF(WIN32)
             )
   ENDIF()
 ENDIF(WIN32)
+if(NOT TARGET gflags)
 ADD_LIBRARY(gflags STATIC IMPORTED GLOBAL)
 SET_PROPERTY(TARGET gflags PROPERTY IMPORTED_LOCATION ${GFLAGS_LIBRARIES})
 ADD_DEPENDENCIES(gflags extern_gflags)
+endif()
 
 # On Windows (including MinGW), the Shlwapi library is used by gflags if available.
 if (WIN32)

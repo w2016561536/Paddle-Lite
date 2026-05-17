@@ -161,6 +161,12 @@ else()
 
         # 2. produce dynamic lib from PADDLELITE_OBJS
         add_library(paddle_light_api_shared SHARED $<TARGET_OBJECTS:PADDLELITE_OBJS>)
+        add_dependencies(paddle_light_api_shared gflags)
+        target_link_libraries(paddle_light_api_shared PRIVATE
+          "-Wl,--whole-archive"
+          gflags
+          "-Wl,--no-whole-archive"
+        )
         set_target_properties(paddle_light_api_shared PROPERTIES COMPILE_FLAGS "${TARGET_COMIPILE_FLAGS}")
         #   2.1 link `paddle_light_api_shared` to third-party libs
         if (LITE_WITH_METAL)

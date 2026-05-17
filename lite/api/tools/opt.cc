@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
     opt.PrintExecutableBinHelpInfo();
     return 0;
   }
-  google::ParseCommandLineFlags(&argc, &argv, false);
+  gflags::ParseCommandLineFlags(&argc, &argv, false);
 
   if (FLAGS_model_dir != "") {
     opt.SetModelDir(FLAGS_model_dir);

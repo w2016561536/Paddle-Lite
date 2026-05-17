@@ -89,6 +89,8 @@
 
 # including binary directory for generated headers.
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+add_subdirectory(third-party/gflags)
+include_directories(${CMAKE_BINARY_DIR}/third-party/gflags/include)
 
 if(NOT APPLE)
   find_package(Threads REQUIRED)
@@ -114,6 +116,17 @@ function(find_fluid_modules TARGET_NAME)
 endfunction(find_fluid_modules)
 
 function(common_link TARGET_NAME)
+if (EXISTS "${CMAKE_BINARY_DIR}/third-party/gflags/include/gflags/gflags.h")
+    target_include_directories(${TARGET_NAME} PRIVATE
+      ${CMAKE_BINARY_DIR}/third-party/gflags/include
+    )
+  endif()
+  if (TARGET gflags)
+    target_link_libraries(${TARGET_NAME} gflags)
+  elseif (TARGET gflags::gflags)
+    target_link_libraries(${TARGET_NAME} gflags::gflags)
+  endif()
+
   if (WITH_PROFILER)
     target_link_libraries(${TARGET_NAME} gperftools::profiler)
   endif()

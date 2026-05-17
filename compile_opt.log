@@ -1,0 +1,1483 @@
+-- Found Paddle host system: ubuntu, version: 22.04.5
+-- Found Paddle host system's CPU: 16 cores
+-- CXX compiler: /usr/bin/c++, version: GNU 11.4.0
+-- C compiler: /usr/bin/cc, version: GNU 11.4.0
+-- AR tools: /usr/bin/ar
+-- CMAKE GENERATOR: Unix Makefiles
+-- CMAKE_BUILD_TYPE: RelWithDebInfo
+-- Do not have AVX2 intrinsics and disabled MKL-DNN
+-- Protobuf protoc executable: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/bin/protoc
+-- Protobuf-lite library: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotobuf-lite.a
+-- Protobuf library: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotobuf.a
+-- Protoc library: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotoc.a
+-- Protobuf version: 3.3.0
+-- BLAS library: /home/w2016/Paddle-Lite/build.opt/third_party/install/openblas/lib/libopenblas.a
+-- BLAS Include: /home/w2016/Paddle-Lite/build.opt/third_party/install/openblas/include
+-- Ccache is founded, use ccache to speed up compile.
+-- Paddle version is 0.0.0
+-- LITE_WITH_CUDA:	OFF
+-- LITE_WITH_X86:	ON
+-- LITE_WITH_ARM:	OFF
+-- LITE_WITH_SW:	OFF
+-- LITE_WITH_OPENCL:	OFF
+-- LITE_WITH_METAL:	OFF
+-- LITE_WITH_NPU:	OFF
+-- LITE_WITH_XPU:	OFF
+-- LITE_WITH_FPGA:	OFF
+-- LITE_WITH_INTEL_FPGA:	OFF
+-- LITE_WITH_MLU:	OFF
+-- LITE_WITH_BM:	OFF
+-- LITE_WITH_NNADAPTER:	OFF
+-- LITE_WITH_PROFILE:	OFF
+-- LITE_WITH_CV:	OFF
+-- add lite kernels
+-- compile with lite host kernels
+-- compile with lite ARM kernels
+-- compile with lite CUDA kernels
+-- compile with lite Metal kernels
+-- tag: 
+-- branch: release/v2.11
+-- commit: 51ca3de7c
+-- bundled_tgt_full_name:  /home/w2016/Paddle-Lite/build.opt/libpaddle_api_full_bundled.a
+-- bundled_tgt_full_name:  /home/w2016/Paddle-Lite/build.opt/libpaddle_api_light_bundled.a
+-- Compiling opt
+-- publish inference lib to /home/w2016/Paddle-Lite/build.opt/inference_lite_lib
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/w2016/Paddle-Lite/build.opt
+Consolidate compiler generated dependencies of target gflags_nothreads_static
+[  0%] Performing build step for 'extern_protobuf'
+[  0%] Built target extern_gflags
+[  1%] Built target extern_eigen3
+[  1%] Built target gflags_nothreads_static
+[  2%] Built target extern_glog
+[  2%] Built target fbs_headers
+Consolidate compiler generated dependencies of target target_wrapper_host
+Consolidate compiler generated dependencies of target utils
+[  3%] Built target utils
+[  3%] Built target target_wrapper_host
+[ 12%] Built target libprotobuf-lite
+[ 51%] Built target libprotobuf
+[ 98%] Built target libprotoc
+[100%] Built target protoc
+[  4%] Performing install step for 'extern_protobuf'
+[ 12%] Built target libprotobuf-lite
+[ 51%] Built target libprotobuf
+Consolidate compiler generated dependencies of target ops
+[ 98%] Built target libprotoc
+[ 16%] Built target ops
+[100%] Built target protoc
+Install the project...
+-- Install configuration: ""
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotobuf-lite.a
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotobuf.a
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/libprotoc.a
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/bin/protoc
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/any.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/any.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/api.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/arena.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/arenastring.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/code_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/command_line_interface.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/cpp/cpp_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/csharp/csharp_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/csharp/csharp_names.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/importer.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/java/java_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/java/java_names.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/javanano/javanano_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/js/js_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/objectivec/objectivec_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/objectivec/objectivec_helpers.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/parser.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/php/php_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/plugin.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/plugin.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/python/python_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/ruby/ruby_generator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/descriptor.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/descriptor.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/descriptor_database.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/duration.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/dynamic_message.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/empty.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/extension_set.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/field_mask.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/generated_enum_reflection.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/generated_enum_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/generated_message_reflection.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/generated_message_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/has_bits.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/coded_stream.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/gzip_stream.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/printer.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/strtod.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/tokenizer.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/zero_copy_stream.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/zero_copy_stream_impl.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/io/zero_copy_stream_impl_lite.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_entry.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_entry_lite.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_field.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_field_inl.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_field_lite.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/map_type_handler.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/message.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/message_lite.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/metadata.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/reflection.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/reflection_ops.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/repeated_field.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/service.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/source_context.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/struct.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomic_sequence_num.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_arm64_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_arm_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_arm_qnx.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_atomicword_compat.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_generic_c11_atomic.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_generic_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_macosx.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_mips_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_power.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_ppc_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_solaris.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_tsan.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_x86_gcc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/atomicops_internals_x86_msvc.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/bytestream.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/callback.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/casts.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/common.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/fastmem.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/hash.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/logging.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/macros.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/mutex.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/once.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/platform_macros.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/port.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/scoped_ptr.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/shared_ptr.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/singleton.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/status.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/stl_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/stringpiece.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/template_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/stubs/type_traits.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/text_format.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/timestamp.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/type.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/unknown_field_set.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/field_comparator.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/field_mask_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/json_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/message_differencer.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/time_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/type_resolver.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/util/type_resolver_util.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/wire_format.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/wire_format_lite.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/wire_format_lite_inl.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/wrappers.pb.h
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/descriptor.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/any.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/api.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/duration.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/empty.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/field_mask.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/source_context.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/struct.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/timestamp.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/type.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/wrappers.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/include/google/protobuf/compiler/plugin.proto
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-targets.cmake
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-targets-noconfig.cmake
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-config-version.cmake
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-options.cmake
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-module.cmake
+-- Up-to-date: /home/w2016/Paddle-Lite/build.opt/third_party/install/protobuf/lib/cmake/protobuf/protobuf-config.cmake
+[ 16%] Completed 'extern_protobuf'
+[ 16%] Built target extern_protobuf
+Consolidate compiler generated dependencies of target framework_proto
+[ 16%] Built target framework_proto
+Consolidate compiler generated dependencies of target model_parser
+[ 18%] Built target model_parser
+Consolidate compiler generated dependencies of target core
+[ 18%] Building CXX object lite/core/CMakeFiles/core.dir/optimizer/mir/subgraph/fpga_conv_fuse_pass.cc.o
+[ 18%] Building CXX object lite/core/CMakeFiles/core.dir/optimizer/mir/subgraph/fpga_conv_fuser.cc.o
+[ 18%] Building CXX object lite/core/CMakeFiles/core.dir/optimizer/optimizer.cc.o
+[ 18%] Building CXX object lite/core/CMakeFiles/core.dir/optimizer/mir/xpu_pattern_matcher_high_api.cc.o
+Consolidate compiler generated dependencies of target kernels
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kFP16_kNCHW_XPU_FP16_FP16__FP32_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kFP16_kNCHW_XPU_FP16_FP32__FP16_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__bigru_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kFP16_kNCHW_XPU_FP16_FP16__FP16_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kFloat_kNCHW_XPU_Real_kFloat_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kInt8_kNCHW_XPU_Int8_FP16_FP16_class.cc.o
+[ 18%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kInt8_kNCHW_XPU_Int8_FP32_FP32_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kInt8_kNCHW_XPU_Int8_FP32_Int8_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kInt8_kNCHW_XPU_Int8_Int8_FP32_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__conv2d_kXPU_kInt8_kNCHW_XPU_Int8_Int8_Int8_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__dynamic_lstm_fuse_op_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 19%] Linking CXX static library libcore.a
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__embedding_with_eltwise_add_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFP16_kNCHW_XPUFC_FP16_FP16_FP16_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFP16_kNCHW_XPUFC_FP16_FP16_FP32_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFP16_kNCHW_XPUFC_FP16_FP32_FP16_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFloat_kNCHW_XPU_FP32_LOCAL_QUANT_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFloat_kNCHW_XPU_Real_kFloat_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 19%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kInt8_kNCHW_XPU_Int8_FP32_FP32_class.cc.o
+[ 28%] Built target core
+[ 28%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kInt8_kNCHW_XPU_Int8_Int8_FP32_class.cc.o
+[ 28%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__fc_kXPU_kInt8_kNCHW_XPU_Int8_Int8_Int8_class.cc.o
+[ 28%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__generate_sequence_kXPU_kAny_kNCHW_def_class.cc.o
+[ 28%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__logit_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 28%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_bid_emb_att_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_bid_emb_grnn_att2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_bid_emb_grnn_att_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_match_conv_topk_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_merge_all_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_search_attention2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__mmdnn_search_attention_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__multi_encoder_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__multi_softmax_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__resnet50_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__softmax_topk_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/__xpu__squeeze_excitation_block_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/abs_kARM_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/abs_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/abs_kHost_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/abs_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/abs_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/acos_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 29%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/affine_channel_kARM_kFloat_kNCHW_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/affine_grid_kARM_kFloat_kNCHW_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/anchor_generator_kHost_kFloat_kNCHW_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/anchor_generator_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kARM_kAny_kNCHW_fp32_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kARM_kAny_kNCHW_int16_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kARM_kAny_kNCHW_int32_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kARM_kAny_kNCHW_int64_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kARM_kAny_kNCHW_uint8_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kHost_kAny_kNCHW_fp32_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kHost_kAny_kNCHW_int16_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kHost_kAny_kNCHW_int32_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kHost_kAny_kNCHW_int64_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kHost_kAny_kNCHW_uint8_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kMetal_kFloat_kMetalTexture2DArray_Int32_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kMetal_kFloat_kMetalTexture2DArray_Int64_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/arg_max_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 30%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/argsort_kHost_kFloat_kAny_argsort_fp32_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/argsort_kHost_kFloat_kAny_argsort_int32_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/argsort_kHost_kFloat_kAny_argsort_int64_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/asin_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kHost_kAny_kAny_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kHost_kAny_kAny_def_tensor_array_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kXPU_kFloat_kNCHW_bool_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_value_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_value_kHost_kAny_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/assign_value_kXPU_kAny_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/atan_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/axpy_kARM_kFloat_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kARM_kFP16_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 31%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kX86_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/batch_norm_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/beam_search_decode_kHost_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/beam_search_kHost_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kARM_kFP16_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kARM_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kX86_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kARM_kFP16_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kARM_kFloat_kNCHW_def_class.cc.o
+[ 32%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kX86_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/bilinear_interp_v2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_clip_kHost_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_clip_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kARM_kFP16_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kARM_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kHost_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kX86_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/box_coder_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kFP16_kNCHW_fp16_to_fp32_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kFP16_kNCHW_fp32_to_fp16_class.cc.o
+[ 34%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt32_kNCHW_fp32_to_int32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt32_kNCHW_int32_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt32_kNCHW_int32_to_int64_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt64_kNCHW_fp32_to_int64_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt64_kNCHW_int64_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt64_kNCHW_int64_to_int32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kARM_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kCUDA_kFloat_kNCHW_fp16_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kCUDA_kFloat_kNCHW_fp32_to_fp16_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kCUDA_kFloat_kNCHW_fp32_to_int8_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kCUDA_kFloat_kNCHW_int8_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kFPGA_kFP16_kNHWC_float_2_int_fpga_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kFPGA_kFP16_kNHWC_float_to_int_fpga_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kFPGA_kFP16_kNHWC_fp32_to_fp16_fpga_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kFPGA_kFP16_kNHWC_int64_2_float_fpga_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kMLU_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kMLU_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 35%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kFloat_kNCHW_fp32_to_int32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kFloat_kNCHW_int32_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kFloat_kNCHW_int32_to_int64_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kFloat_kNCHW_int64_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kFloat_kNCHW_int64_to_int32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kX86_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kFloat_kNCHW_calib_fp16_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kFloat_kNCHW_calib_fp32_to_fp16_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kFloat_kNCHW_calib_int32_to_int64_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kFloat_kNCHW_calib_int64_to_int32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kInt8_kNCHW_calib_fp32_to_int8_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_kXPU_kInt8_kNCHW_calib_int8_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kARM_kFP16_kNCHW_fp16_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kARM_kFP16_kNCHW_fp32_to_fp16_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kARM_kInt64_kNCHW_int64_to_int32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kARM_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kARM_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 36%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kCUDA_kFloat_kNCHW_fp16_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kCUDA_kFloat_kNCHW_fp32_to_fp16_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kCUDA_kFloat_kNCHW_fp32_to_int8_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kCUDA_kFloat_kNCHW_int8_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kFPGA_kFP16_kNHWC_float_2_int_fpga_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kFPGA_kFP16_kNHWC_fp16_to_fp32_fpga_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kFPGA_kFP16_kNHWC_fp32_to_fp16_fpga_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kFPGA_kFP16_kNHWC_int64_2_float_fpga_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kMLU_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kMLU_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kFloat_kNCHW_fp32_to_int32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kFloat_kNCHW_int32_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kFloat_kNCHW_int32_to_int64_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kFloat_kNCHW_int64_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kFloat_kNCHW_int64_to_int32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kInt8_kNCHW_fp32_to_int8_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kX86_kInt8_kNCHW_int8_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kXPU_kFloat_kNCHW_calib_fp16_to_fp32_class.cc.o
+[ 37%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kXPU_kFloat_kNCHW_calib_fp32_to_fp16_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kXPU_kFloat_kNCHW_calib_int32_to_int64_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/calib_once_kXPU_kFloat_kNCHW_calib_int64_to_int32_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kHost_kAny_kNCHW_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_bool_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_fp32_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_i32_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_i64_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_i8_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cast_kXPU_kAny_kNCHW_cast_u8_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/clip_kARM_kFloat_kNCHW_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/clip_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/clip_kX86_kFloat_kNCHW_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/clip_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/collect_fpn_proposals_kHost_kFloat_kNCHW_def_class.cc.o
+[ 38%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kARM_kAny_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kX86_kFloat_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kXPU_kFP16_kNCHW_concat_FP16_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kXPU_kFloat_kNCHW_concat_INT32_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kXPU_kFloat_kNCHW_concat_INT64_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/concat_kXPU_kInt16_kNCHW_DISABLE_XPU1_concat_INT16_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conditional_block_kHost_kAny_kAny_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kARM_kFP16_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kARM_kFloat_kNCHW_def_class.cc.o
+[ 39%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kARM_kInt8_kNCHW_fp32_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kARM_kInt8_kNCHW_int8_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kCUDA_kInt8_kNHWC_fp32_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kCUDA_kInt8_kNHWC_int8_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kIntelFPGA_kFloat_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kOpenCL_kFP16_kImageDefault_image2d_pc_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kX86_kFloat_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kX86_kInt8_kNCHW_fp32_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kX86_kInt8_kNCHW_int8_out_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kARM_kFP16_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kARM_kFloat_kNCHW_def_class.cc.o
+[ 40%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kARM_kInt8_kNCHW_fp32_out_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kARM_kInt8_kNCHW_int8_out_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kX86_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv2d_transpose_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv3d_kXPU_kFP16_kNCHW_XPU_FP16_FP16_FP16_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv3d_kXPU_kFP16_kNCHW_XPU_FP16_FP16_FP32_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv3d_kXPU_kFP16_kNCHW_XPU_FP16_FP32_FP16_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv3d_kXPU_kFloat_kNCHW_XPU_Real_kFloat_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/conv3d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/correlation_kHost_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/correlation_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cos_kHost_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cos_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cos_sim_kHost_kFloat_kNCHW_def_class.cc.o
+[ 41%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/crf_decoding_kHost_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/crop_kHost_kFloat_kAny_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/crop_kHost_kInt32_kAny_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/crop_tensor_kHost_kFloat_kAny_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/crop_tensor_kHost_kFloat_kAny_int32_precision_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/ctc_align_kHost_kInt32_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/ctc_align_kHost_kInt64_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cumsum_kHost_kFloat_kAny_float32_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cumsum_kHost_kFloat_kAny_int32_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/cumsum_kHost_kFloat_kAny_int64_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/decode_bboxes_kARM_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/deformable_conv_kARM_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/deformable_conv_kHost_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/density_prior_box_kHost_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/density_prior_box_kX86_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/density_prior_box_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kARM_kFP16_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kARM_kFloat_kNCHW_def_class.cc.o
+[ 42%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kARM_kInt8_kNCHW_fp32_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kARM_kInt8_kNCHW_int8_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kIntelFPGA_kFloat_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kOpenCL_kFP16_kImageDefault_image2d_pc_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kX86_kFloat_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kX86_kInt8_kNCHW_fp32_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kX86_kInt8_kNCHW_int8_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_transpose_kARM_kFP16_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_transpose_kARM_kFloat_kNCHW_def_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_transpose_kARM_kInt8_kNCHW_fp32_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_transpose_kARM_kInt8_kNCHW_int8_out_class.cc.o
+[ 43%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/depthwise_conv2d_transpose_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/distribute_fpn_proposals_kHost_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kARM_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kX86_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/dropout_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kFP16_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kInt32_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kARM_kInt64_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 44%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kX86_kFloat_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kXPU_kFloat_kNCHW_DISABLE_XPU1_AddFloat16_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_add_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kARM_kFP16_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kARM_kFloat_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kARM_kInt32_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kARM_kInt64_kNCHW_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 45%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kX86_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_div_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kARM_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kARM_kInt32_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kARM_kInt64_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kX86_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_floordiv_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kARM_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kX86_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 46%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_max_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_min_kARM_kFloat_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_min_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_min_kX86_kFloat_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_min_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_min_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kARM_kFloat_kNCHW_int32_mod_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kARM_kInt64_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mod_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kFP16_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kFloat_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kInt32_kNCHW_def_class.cc.o
+[ 47%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kARM_kInt64_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kFPGA_kFP16_kNHWC_ew_mul_fpga_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kFPGA_kFP16_kNHWC_ew_mul_y_arm_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kX86_kFloat_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kXPU_kFloat_kNCHW_DISABLE_XPU1_MulFloat16_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_mul_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kARM_kFloat_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kARM_kInt32_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kX86_kFloat_kNCHW_def_class.cc.o
+[ 48%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_pow_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kARM_kFP16_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kARM_kFloat_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kARM_kInt32_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kX86_kFloat_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elementwise_sub_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 49%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/elu_kHost_kFloat_kNCHW_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kHost_kFloat_kAny_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kHost_kFloat_kAny_int32_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kHost_kFloat_kAny_int64_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kHost_kInt32_kAny_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kHost_kInt64_kAny_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kXPU_kFloat_kAny_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kXPU_kFloat_kAny_int64_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/equal_kXPU_kFloat_kAny_int32_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/erf_kARM_kFloat_kNCHW_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kARM_kFloat_kNCHW_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kHost_kFloat_kNCHW_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/exp_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 50%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_as_kHost_kFloat_kAny_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_as_kHost_kFloat_kAny_int64_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_kHost_kAny_kAny_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_v2_kHost_kFloat_kAny_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_v2_kHost_kFloat_kAny_def_int32_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_v2_kHost_kFloat_kAny_def_int64_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/expand_v2_kXPU_kFloat_kAny_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kARM_kFP16_kNCHW_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kARM_kFloat_kNCHW_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kARM_kInt8_kNCHW_fp32out_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kARM_kInt8_kNCHW_int8out_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kOpenCL_kFP16_kImageFolder_image2d_class.cc.o
+[ 51%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kOpenCL_kFloat_kNCHW_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kOpenCL_kFloat_kNCHW_pc_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kX86_kFloat_kNCHW_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kX86_kInt8_kNCHW_fp32_out_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fc_kX86_kInt8_kNCHW_int8_out_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kFloat_kNCHW_nchw_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kFloat_kNHWC_nhwc_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kInt32_kNCHW_nchw_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kInt32_kNHWC_nhwc_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kInt64_kNCHW_nchw_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kCUDA_kInt64_kNHWC_nhwc_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kFPGA_kFP16_kNHWC_feed_int32_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kHost_kAny_kAny_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kMetal_kAny_kAny_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/feed_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fetch_kFPGA_kFP16_kNHWC_host_host_class.cc.o
+[ 52%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fetch_kHost_kAny_kAny_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fetch_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_any_like_kHost_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_any_like_kXPU_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_constant_batch_size_like_kHost_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_constant_batch_size_like_kXPU_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_constant_kHost_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_constant_kXPU_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kHost_kAny_kNCHW_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kHost_kFloat_kNCHW_float32_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kHost_kFloat_kNCHW_int32_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kHost_kFloat_kNCHW_int64_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kXPU_kFloat_kNCHW_float32_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fill_zeros_like_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kHost_kAny_kAny_def_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kMetal_kFP16_kMetalTexture2DArray_image2d_class.cc.o
+[ 53%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kMetal_kFloat_kMetalTexture2DArray_image2d_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kXPU_kFP16_kNCHW_float16_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kXPU_kFloat_kNCHW_float32_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten2_kXPU_kInt8_kNCHW_int8_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_contiguous_range_kHost_kAny_kAny_def_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_contiguous_range_kXPU_kAny_kAny_def_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kHost_kAny_kAny_def_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kMetal_kFP16_kMetalTexture2DArray_image2d_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kMetal_kFloat_kMetalTexture2DArray_image2d_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kXPU_kFP16_kNCHW_float16_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kXPU_kFloat_kNCHW_float32_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flatten_kXPU_kInt8_kNCHW_int8_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flip_kHost_kAny_kNCHW_flip_fp32_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/flip_kHost_kAny_kNCHW_flip_i64_class.cc.o
+[ 54%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/floor_kARM_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/floor_kHost_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/floor_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fpga_conv2d_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kARM_kFP16_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_add_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_div_activation_kARM_kFP16_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_div_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_div_activation_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_div_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_max_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 55%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_max_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_min_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_min_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kARM_kFP16_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kARM_kInt64_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_mul_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kARM_kFP16_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kARM_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kCUDA_kFloat_kNHWC_nhwc_format_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/fusion_elementwise_sub_activation_kX86_kFloat_kNCHW_def_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kHost_kFloat_kNCHW_int32int32_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kHost_kFloat_kNCHW_int32int64_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kHost_kFloat_kNCHW_int64int32_class.cc.o
+[ 56%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kHost_kFloat_kNCHW_int64int64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kX86_kFloat_kNCHW_int32int32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kX86_kFloat_kNCHW_int32int64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kX86_kFloat_kNCHW_int64int32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kX86_kFloat_kNCHW_int64int64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kFP16_kNCHW_gather_FP16_Int32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kFloat_kNCHW_gather_FP32_INT64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kInt32_kNCHW_gather_INT32_INT32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kInt32_kNCHW_gather_INT32_INT64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_kXPU_kInt64_kNCHW_gather_INT64_INT32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kHost_kAny_kAny_def_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kFloat_kNCHW_gather_FP32_INT64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kInt32_kNCHW_gather_INT32_INT32_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kInt32_kNCHW_gather_INT32_INT64_class.cc.o
+[ 57%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kInt64_kNCHW_gather_INT64_INT32_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_nd_kXPU_kInt64_kNCHW_gather_INT64_INT64_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_tree_kHost_kFloat_kAny_int32_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gather_tree_kHost_kFloat_kAny_int64_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gaussian_random_kHost_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gelu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gelu_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gelu_kX86_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gelu_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/generate_proposals_kHost_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/generate_proposals_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/generate_proposals_v2_kHost_kFloat_kNCHW_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kHost_kFloat_kAny_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kHost_kFloat_kAny_def_int32_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kHost_kFloat_kAny_def_int64_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kXPU_kFloat_kAny_def_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kXPU_kFloat_kAny_int32_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_equal_kXPU_kFloat_kAny_int64_class.cc.o
+[ 58%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kHost_kFloat_kAny_def_bool_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kHost_kFloat_kAny_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kHost_kFloat_kAny_def_int32_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kHost_kFloat_kAny_def_int64_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kHost_kInt64_kAny_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kXPU_kFloat_kAny_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kXPU_kFloat_kAny_int32_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/greater_than_kXPU_kFloat_kAny_int64_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/grid_sampler_kARM_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/grid_sampler_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/grid_sampler_kX86_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/grid_sampler_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/group_norm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/group_norm_kX86_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kARM_kFP16_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kARM_kFloat_kNCHW_def_class.cc.o
+[ 59%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kARM_kInt8_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kX86_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_unit_kARM_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_unit_kX86_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/gru_unit_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kARM_kFP16_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kARM_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kHost_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_sigmoid_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kARM_kFP16_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kARM_kFloat_kNCHW_def_class.cc.o
+[ 60%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kHost_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kX86_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/hard_swish_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/im2sequence_kHost_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/im2sequence_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/increment_kHost_kAny_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/increment_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/index_select_kHost_kAny_kNCHW_fp32_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/index_select_kHost_kAny_kNCHW_int16_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/index_select_kHost_kAny_kNCHW_int32_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/index_select_kHost_kAny_kNCHW_int8_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/instance_norm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/instance_norm_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/instance_norm_kX86_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/instance_norm_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 61%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/inverse_kHost_kFloat_kNCHW_fp32_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kCUDA_kAny_kAny_device_to_host_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kCUDA_kAny_kAny_host_to_device_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kFPGA_kAny_kAny_device_to_host_chw_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kFPGA_kAny_kAny_device_to_host_hwc_chw_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kFPGA_kAny_kAny_host_float_chw_to_device_fp16_hwc_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kFPGA_kAny_kAny_host_to_device_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kFP16_kNHWC_device_to_host_kFP16_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kFP16_kNHWC_host_to_device_kFP16_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kFloat_kNHWC_device_to_host_kFloat_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kFloat_kNHWC_host_to_device_kFloat_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kInt32_kNHWC_host_to_device_kInt32_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMLU_kInt8_kNHWC_host_to_device_to_kInt8_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMetal_kFloat_kMetalTexture2DArray_device_image_to_host_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kMetal_kFloat_kMetalTexture2DArray_host_to_device_image_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kOpenCL_kAny_kAny_device_to_host_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kOpenCL_kAny_kAny_host_to_device_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kXPU_kAny_kAny_device_to_host_class.cc.o
+[ 62%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_kXPU_kAny_kAny_host_to_device_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kCUDA_kAny_kAny_device_to_host_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kCUDA_kAny_kAny_host_to_device_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kFPGA_kAny_kAny_device_to_host_chw_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kFPGA_kAny_kAny_device_to_host_hwc_chw_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kFPGA_kAny_kAny_host_float_chw_to_device_fp16_hwc_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kMetal_kFloat_kMetalTexture2DArray_device_image_to_host_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kMetal_kFloat_kMetalTexture2DArray_host_to_device_image_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kOpenCL_kAny_kAny_device_to_host_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kOpenCL_kAny_kAny_host_to_device_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kXPU_kAny_kAny_device_to_host_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/io_copy_once_kXPU_kAny_kAny_host_to_device_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/is_empty_kHost_kAny_kAny_def_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/is_empty_kXPU_kAny_kAny_def_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layer_norm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layer_norm_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layer_norm_kX86_kFloat_kNCHW_def_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layer_norm_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 63%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kARM_kFloat_kNCHW_nchw2nhwc_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kARM_kFloat_kNCHW_nhwc2nchw_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kARM_kInt8_kNCHW_int8_nchw2nhwc_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kARM_kInt8_kNCHW_int8_nhwc2nchw_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kCUDA_kFloat_kNCHW_nchw2nhwc_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kCUDA_kFloat_kNCHW_nhwc2nchw_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kCUDA_kInt8_kNCHW_int8_nchw2nhwc_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kCUDA_kInt8_kNCHW_int8_nhwc2nchw_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kFPGA_kAny_kNHWC_chw_to_hwc_fpga_fp16_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kFPGA_kAny_kNHWC_hwc_to_chw_arm_float_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kFPGA_kAny_kNHWC_hwc_to_chw_fpga_fp16_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kImageDefault_ImageFolder_to_ImageDefault_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kImageDefault_NCHW_to_ImageDefault_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kImageFolder_ImageDefault_to_ImageFolder_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kImageFolder_NCHW_to_ImageFolder_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kNCHW_ImageDefault_to_NCHW_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kNCHW_ImageFolder_to_NCHW_class.cc.o
+[ 64%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kOpenCL_kAny_kNCHW_def_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kX86_kFP16_kNCHW_def_layout_nchw2nhwc_fp16_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kX86_kFP16_kNCHW_def_layout_nhwc2nchw_fp16_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kX86_kFloat_kNCHW_def_layout_nchw2nhwc_fp32_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kX86_kFloat_kNCHW_def_layout_nhwc2nchw_fp32_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_kX86_kInt8_kNCHW_def_layout_nchw2nhwc_int8_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kARM_kFloat_kNCHW_nchw2nhwc_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kARM_kFloat_kNCHW_nhwc2nchw_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kARM_kInt8_kNCHW_int8_nchw2nhwc_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kARM_kInt8_kNCHW_int8_nhwc2nchw_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kCUDA_kFloat_kNCHW_nchw2nhwc_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kCUDA_kFloat_kNCHW_nhwc2nchw_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kCUDA_kInt8_kNCHW_int8_nchw2nhwc_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kCUDA_kInt8_kNCHW_int8_nhwc2nchw_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kFPGA_kAny_kNHWC_chw_to_hwc_fpga_fp16_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kFPGA_kAny_kNHWC_hwc_to_chw_fpga_fp16_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kOpenCL_kAny_kImageDefault_NCHW_to_ImageDefault_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/layout_once_kOpenCL_kAny_kNCHW_ImageDefault_to_NCHW_class.cc.o
+[ 65%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kHost_kFloat_kNCHW_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kX86_kFloat_kNCHW_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kXPU_kFP16_kNCHW_leaky_reluFP16_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/leaky_relu_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_equal_kHost_kFloat_kAny_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_equal_kHost_kFloat_kAny_int32_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_equal_kHost_kFloat_kAny_int64_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_equal_kHost_kInt64_kAny_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kHost_kFloat_kAny_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kHost_kFloat_kAny_int32_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kHost_kFloat_kAny_int64_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kHost_kInt32_kAny_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kHost_kInt64_kAny_def_class.cc.o
+[ 67%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kXPU_kFloat_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kXPU_kFloat_kAny_int32_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/less_than_kXPU_kFloat_kAny_int64_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/linspace_kHost_kFloat_kAny_float32_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/linspace_kHost_kInt32_kAny_int32_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lod_array_length_kHost_kAny_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lod_array_length_kXPU_kAny_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lod_reset_kHost_kAny_kNCHW_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/log_kARM_kFloat_kNCHW_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/log_kHost_kFloat_kNCHW_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/log_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/log_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/log_softmax_kHost_kFloat_kNCHW_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_and_kHost_kAny_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_and_kXPU_kFloat_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_not_kHost_kAny_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_not_kXPU_kFloat_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_or_kHost_kAny_kAny_def_class.cc.o
+[ 68%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/logical_xor_kHost_kAny_kAny_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_dequant_kARM_kAny_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_kARM_kAny_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_kX86_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_v2_kARM_kAny_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_v2_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_v2_kX86_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lookup_table_v2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lrn_kARM_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lrn_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lrn_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lstm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/lstm_kARM_kInt8_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/match_matrix_tensor_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/match_matrix_tensor_kX86_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/match_matrix_tensor_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 69%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kARM_kFP16_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kARM_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kARM_kInt8_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kOpenCL_kFP16_kImageFolder_image2d_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kOpenCL_kFP16_kImageFolder_image2d_host_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kOpenCL_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kX86_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kARM_kFP16_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kARM_kFloat_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kARM_kInt8_kNCHW_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 70%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kOpenCL_kFP16_kImageFolder_image2d_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kOpenCL_kFP16_kImageFolder_image2d_host_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kOpenCL_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matmul_v2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/matrix_nms_kHost_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/max_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/max_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/max_pool2d_with_index_kHost_kFloat_kNCHW_fp32_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/max_pool2d_with_index_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mean_kARM_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/merge_lod_tensor_kHost_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/meshgrid_kHost_kFloat_kAny_float32_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/meshgrid_kHost_kFloat_kAny_int32_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mish_kARM_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mish_kX86_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kARM_kFP16_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kARM_kFloat_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kARM_kInt8_kNCHW_def_class.cc.o
+[ 71%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kX86_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/mul_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/multiclass_nms2_kFPGA_kFP16_kNHWC_def2_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/multiclass_nms2_kHost_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/multiclass_nms3_kHost_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/multiclass_nms_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/multiclass_nms_kHost_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kARM_kFP16_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kARM_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kX86_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 72%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kARM_kFP16_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kARM_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kX86_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/nearest_interp_v2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/negative_kARM_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/norm_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/norm_kHost_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/norm_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/norm_kXPU_kFloat_kNCHW_l2_norm_fp16_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/not_equal_kHost_kFloat_kAny_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/not_equal_kHost_kFloat_kAny_int32_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/not_equal_kHost_kFloat_kAny_int64_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/one_hot_kHost_kAny_kAny_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/one_hot_v2_kHost_kAny_kAny_def_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/one_hot_v2_kHost_kAny_kAny_one_hot_v2_int32_class.cc.o
+[ 73%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/p_norm_kHost_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kARM_kFP16_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kARM_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kHost_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad3d_kHost_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad3d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pad_constant_like_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pixel_shuffle_kARM_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pixel_shuffle_kHost_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pixel_shuffle_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pixel_shuffle_kXPU_kFP16_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pixel_shuffle_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/polygon_box_transform_kHost_kFloat_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kARM_kFP16_kNCHW_def_class.cc.o
+[ 74%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kARM_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kCUDA_kFloat_kNHWC_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kX86_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kXPU_kFP16_kNCHW_DISABLE_XPU1_pool2d_FP16_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pool2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pow_kARM_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pow_kX86_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/pow_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prelu_kARM_kFP16_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prelu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prelu_kHost_kFloat_kNCHW_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prelu_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 75%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prelu_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/print_kHost_kAny_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prior_box_kARM_kFP16_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prior_box_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prior_box_kHost_kFloat_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/prior_box_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kHost_kFloat_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kHost_kFloat_kAny_int32_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kHost_kFloat_kAny_int64_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kHost_kInt32_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kHost_kInt64_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kXPU_kFloat_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kXPU_kFloat_kAny_range_int32_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/range_kXPU_kFloat_kAny_range_int64_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/read_from_array_kHost_kAny_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/read_from_array_kXPU_kAny_kAny_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reciprocal_kARM_kFloat_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reciprocal_kHost_kFloat_kNCHW_def_class.cc.o
+[ 76%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reciprocal_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_all_kHost_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_all_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_any_kHost_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_any_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kARM_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kARM_kFloat_kNCHW_i64_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kX86_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_max_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kARM_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kX86_kFloat_kNCHW_def_class.cc.o
+[ 77%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kXPU_kFloat_kNCHW_DISABLE_XPU1_ReduceMeanFloat16_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_mean_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kARM_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kARM_kFloat_kNCHW_def_int64_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kX86_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_min_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kARM_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kARM_kFloat_kNCHW_reduce_prod_i64_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kARM_kInt32_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kX86_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_prod_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kARM_kFloat_kNCHW_def_class.cc.o
+[ 78%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kARM_kFloat_kNCHW_def_int32_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kX86_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reduce_sum_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kARM_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kHost_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kX86_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu6_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_clipped_kARM_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_clipped_kHost_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kARM_kFP16_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 79%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kHost_kFloat_kNCHW_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kX86_kFloat_kNCHW_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kXPU_kFP16_kNCHW_reluFP16_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/relu_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kHost_kAny_kAny_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kXPU_kFP16_kNCHW_float16_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kXPU_kFloat_kNCHW_float32_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 80%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape2_kXPU_kInt8_kNCHW_int8_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kHost_kAny_kAny_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kXPU_kFP16_kNCHW_float16_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kXPU_kFloat_kNCHW_float32_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reshape_kXPU_kInt8_kNCHW_int8_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/retinanet_detection_output_kHost_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/reverse_kHost_kAny_kNCHW_fp32_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rnn_kARM_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rnn_kX86_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rnn_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/roi_align_kHost_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/roi_align_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/roi_perspective_transform_kHost_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rsqrt_kARM_kFloat_kNCHW_def_class.cc.o
+[ 81%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rsqrt_kHost_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rsqrt_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rsqrt_kX86_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/rsqrt_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sampling_id_kHost_kAny_kAny_float32_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kFP16_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kInt32_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kARM_kInt64_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kX86_kFloat_kNCHW_def_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 82%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scale_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_kARM_kFloat_kNCHW_ids_int32_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_kARM_kFloat_kNCHW_ids_int64_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_float32_int64_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_int32_int32_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_int32_int64_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_int64_int32_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/scatter_nd_add_kHost_kFloat_kNCHW_int64_int64_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_aligned_mat_mul_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_aligned_mat_mul_kX86_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_attention_padding_mask_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_attention_padding_mask_kX86_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_fc_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_fc_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_grnn_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 83%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_grnn_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_grnn_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_group_padding_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_group_padding_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_arithmetic_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_arithmetic_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_arithmetic_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_depadding_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_depadding_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_fc_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_fc_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_softmax_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_softmax_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/search_seq_softmax_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/select_input_kHost_kAny_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_arithmetic_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_arithmetic_kX86_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_arithmetic_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 84%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_concat_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_concat_kX86_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_concat_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_conv_kARM_kFP16_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_conv_kARM_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_conv_kX86_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kARM_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kARM_kFloat_kNCHW_int32_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kARM_kFloat_kNCHW_int64_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kX86_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_as_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_kHost_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_kHost_kFloat_kNCHW_int32_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_expand_kHost_kFloat_kNCHW_int64_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 85%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kHost_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kHost_kFloat_kNCHW_int32_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kHost_kFloat_kNCHW_int64_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_mask_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kHost_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kHost_kFloat_kNCHW_int32_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kHost_kFloat_kNCHW_int64_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pad_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_concat_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_kARM_kFP16_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_kARM_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_kX86_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_pool_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reshape_kX86_kFloat_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reshape_kX86_kInt64_kNCHW_def_class.cc.o
+[ 86%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_embedding_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kCUDA_kInt64_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kX86_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_reverse_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_softmax_kHost_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_topk_avg_pooling_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_topk_avg_pooling_kX86_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_topk_avg_pooling_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kHost_kFloat_kAny_float32_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kHost_kFloat_kAny_int64_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kXPU_kFloat_kAny_int64_class.cc.o
+[ 87%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sequence_unpad_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shape_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shape_kHost_kAny_kAny_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shape_kOpenCL_kAny_kAny_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shape_kXPU_kAny_kAny_xpu_shape_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shuffle_channel_kARM_kFP16_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shuffle_channel_kHost_kFloat_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shuffle_channel_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shuffle_channel_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/shuffle_channel_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kARM_kFloat_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kHost_kFloat_kNCHW_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 88%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kX86_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kXPU_kFP16_kNCHW_sigmoidFP16_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sigmoid_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sign_kARM_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sign_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sin_kHost_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sin_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_array_bool_slice_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_array_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_array_def_int64_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_array_float_i64_starts_ends_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_array_int32_slice_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_bool_slice_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_def_int64_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_float_i64_starts_ends_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kARM_kFloat_kNCHW_int32_slice_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 89%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kOpenCL_kFloat_kNCHW_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kOpenCL_kInt32_kNCHW_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kOpenCL_kInt64_kNCHW_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_array_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_array_int32_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_array_int64_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_int32_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_array_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_array_int32_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_array_int64_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_def_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_int32_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/slice_kXPU_kFloat_kAny_int64_class.cc.o
+[ 90%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kARM_kFP16_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kARM_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kOpenCL_kFP16_kImageFolder_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kX86_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softmax_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softplus_kARM_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softplus_kHost_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softsign_kX86_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/softsign_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sparse_conv2d_kARM_kFloat_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sparse_conv2d_kARM_kInt8_kNCHW_int8_fp32_out_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sparse_conv2d_kARM_kInt8_kNCHW_int8_int8_out_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kHost_kFP16_kNCHW_def_class.cc.o
+[ 91%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kHost_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kHost_kFloat_kNCHW_int32_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kHost_kFloat_kNCHW_int64_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kHost_kInt64_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/split_lod_tensor_kARM_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sqrt_kARM_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sqrt_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sqrt_kX86_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sqrt_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/square_kARM_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/square_kHost_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/square_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/square_kX86_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/square_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 92%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze2_kHost_kAny_kAny_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze2_kOpenCL_kAny_kNCHW_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze2_kXPU_kAny_kAny_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze_kHost_kAny_kAny_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze_kOpenCL_kAny_kNCHW_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/squeeze_kXPU_kAny_kAny_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kHost_kFloat_kAny_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kHost_kFloat_kAny_int32_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kHost_kFloat_kAny_int64_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kX86_kFloat_kNCHW_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kXPU_kFloat_kNCHW_int32_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/stack_kXPU_kFloat_kNCHW_int64_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/strided_slice_kHost_kFloat_kNCHW_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/strided_slice_kHost_kFloat_kNCHW_def_int32_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/strided_slice_kHost_kFloat_kNCHW_def_int64_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/subgraph_kFPGA_kAny_kNHWC_def_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/subgraph_kMLU_kFP16_kNHWC_def_FP16_class.cc.o
+[ 93%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/subgraph_kMLU_kFloat_kNHWC_def_kFloat_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/subgraph_kNNAdapter_kAny_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/subgraph_kNPU_kAny_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sum_kARM_kFloat_kNCHW_sum_fp32_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sum_kARM_kFloat_kNCHW_sum_i32_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sum_kARM_kFloat_kNCHW_sum_i64_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sum_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kARM_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kHost_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/swish_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sync_batch_norm_kARM_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sync_batch_norm_kOpenCL_kFP16_kImageDefault_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/sync_batch_norm_kX86_kFloat_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tan_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kARM_kFP16_kNCHW_def_class.cc.o
+[ 94%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kARM_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kHost_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kOpenCL_kFP16_kImageDefault_ImageDefault_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kX86_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kXPU_kFP16_kNCHW_tanhFP16_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tanh_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tensor_array_to_tensor_kHost_kAny_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/thresholded_relu_kARM_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/thresholded_relu_kHost_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kHost_kFloat_kNCHW_def_bool_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kHost_kFloat_kNCHW_def_float_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kHost_kFloat_kNCHW_def_int32_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kHost_kFloat_kNCHW_def_int64_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kHost_kFloat_kNCHW_def_int8_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tile_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/top_k_kHost_kFloat_kNCHW_def_class.cc.o
+[ 95%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/top_k_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/top_k_v2_kHost_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/topk_pooling_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kARM_kAny_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kX86_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kXPU_kFloat_kNCHW_def_int32_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose2_kXPU_kFloat_kNCHW_def_int64_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kARM_kAny_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 96%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kOpenCL_kFP16_kImageDefault_image2d_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kX86_kFloat_kNCHW_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kX86_kFloat_kNCHW_int64_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/transpose_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/tril_triu_kHost_kAny_kNCHW_float32_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unbind_kHost_kFloat_kNCHW_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unbind_kHost_kFloat_kNCHW_def_int64_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unfold_kHost_kFloat_kNCHW_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unfold_kHost_kFloat_kNCHW_def_int32_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unfold_kHost_kFloat_kNCHW_def_int64_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unfold_kHost_kInt8_kNCHW_def_int8_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/uniform_random_kHost_kAny_kAny_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unique_with_counts_kHost_kAny_kAny_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze2_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze2_kHost_kAny_kAny_def_class.cc.o
+[ 97%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze2_kOpenCL_kAny_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze2_kXPU_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze_kFPGA_kFP16_kNHWC_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze_kHost_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze_kOpenCL_kAny_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unsqueeze_kXPU_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unstack_kHost_kFloat_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unstack_kHost_kFloat_kAny_unstack_int32_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/unstack_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/var_conv_2d_kCUDA_kFP16_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/var_conv_2d_kCUDA_kFloat_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/var_conv_2d_kX86_kFloat_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/var_conv_2d_kXPU_kFloat_kNCHW_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/where_index_kHost_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/where_kHost_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/where_kXPU_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/where_kXPU_kAny_kAny_where_int32_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/while_kHost_kAny_kAny_def_class.cc.o
+[ 98%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/write_back_kHost_kAny_kAny_write_back_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/write_to_array_kHost_kAny_kAny_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/write_to_array_kXPU_kAny_kAny_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kARM_kFP16_kNCHW_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kCUDA_kFloat_kNCHW_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kFPGA_kFP16_kNHWC_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kFPGA_kFP16_kNHWC_def_float_size_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kHost_kFloat_kNCHW_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kMetal_kFP16_kMetalTexture2DArray_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kMetal_kFloat_kMetalTexture2DArray_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kOpenCL_kAny_kNCHW_def_class.cc.o
+[100%] Building CXX object lite/kernels/CMakeFiles/kernels.dir/__/__/all_kernel_faked_dir/yolo_box_kXPU_kFloat_kNCHW_def_class.cc.o
+[100%] Linking CXX static library libkernels.a
+[100%] Built target kernels
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/cxx_api_impl.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/light_api_impl.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/light_api.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/paddle_api.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/paddle_place.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/paddle_api_full.dir/cxx_api.cc.o
+[100%] Linking CXX static library libpaddle_api_full.a
+[100%] Built target paddle_api_full
+Bundling paddle_api_full_bundled
+[100%] Built target bundle_full_api
+[100%] Building CXX object lite/api/CMakeFiles/opt.dir/tools/opt.cc.o
+[100%] Building CXX object lite/api/CMakeFiles/opt.dir/tools/opt_base.cc.o
+[100%] Linking CXX executable opt
+Strip debug symbols done on final executable file.
+[100%] Built target opt

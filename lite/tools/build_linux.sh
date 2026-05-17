@@ -5,11 +5,11 @@ set -e
 # 1. global variables, you can change them according to your requirements
 #####################################################################################################
 # armv8 or armv7hf or armv7 or x86, default armv8.
-ARCH=armv8
+ARCH=armv7hf
 # gcc or clang, default gcc.
 TOOLCHAIN=gcc
 # ON or OFF, default OFF.
-WITH_EXTRA=OFF
+WITH_EXTRA=ON
 # controls whether to compile python lib, default is OFF.
 WITH_PYTHON=OFF
 PY_VERSION=""
@@ -89,7 +89,7 @@ WITH_BENCHMARK=OFF
 # option of light weight framework, default is OFF
 WITH_LIGHT_WEIGHT_FRAMEWORK=OFF
 # num of threads used during compiling..
-readonly NUM_PROC=${LITE_BUILD_THREADS:-4}
+readonly NUM_PROC=8
 #####################################################################################################
 
 
