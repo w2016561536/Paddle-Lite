@@ -77,6 +77,12 @@ class CalibConv2dOpLite : public OpLite {
     auto Bias1 = op_desc.Input("Bias_Depthwise_Conv2d").front();
     auto Out = op_desc.Output("Output").front();
 
+    if (op_desc.HasAttr("need_conv2d_output") && op_desc.GetAttr<bool>("need_conv2d_output") == true){
+      auto Out_conv2d = op_desc.Output("Output_Conv2d").front();
+      param_.conv2d_output = scope->FindVar(Out_conv2d)->GetMutable<lite::Tensor>();
+      output_tensor_ptrs_cache_.push_back(param_.conv2d_output);
+    }
+
     param_.x = scope->FindVar(Input)->GetMutable<lite::Tensor>();
     param_.filter = scope->FindVar(Filter)->GetMutable<lite::Tensor>();
     param_.depthwise_filter = scope->FindVar(Filter1)->GetMutable<lite::Tensor>();
@@ -95,52 +101,6 @@ class CalibConv2dOpLite : public OpLite {
     auto dilations = op_desc.GetAttr<std::vector<int>>("dilations");
     param_.dilations = std::make_shared<std::vector<int>>(dilations);
 
-    // optional params
-    std::vector<std::string> input_arg_names = op_desc.InputArgumentNames();
-    if (std::find(input_arg_names.begin(), input_arg_names.end(), "Bias") !=
-        input_arg_names.end()) {
-      auto bias_arguments = op_desc.Input("Bias");
-      if (bias_arguments.size() > 0) {
-        auto bias_var = scope->FindVar(bias_arguments.front());
-        if (bias_var != nullptr) {
-          param_.bias =
-              const_cast<lite::Tensor*>(&(bias_var->Get<lite::Tensor>()));
-        }
-      }
-    }
-
-    if (op_desc.HasAttr("padding_algorithm")) {
-      padding_algorithm_ = op_desc.GetAttr<std::string>("padding_algorithm");
-    }
-    // For Int8
-    const OpInfo* op_info = static_cast<const OpInfo*>(&op_desc);
-    if (op_info != nullptr && op_info->HasAttr("enable_int8")) {
-      param_.enable_int8 = op_info->GetAttr<bool>("enable_int8");
-      auto input_scale_name = "Input0_scale";
-      auto filter_scale_name = "Filter0_scale";
-      auto output_scale_name = "Output0_scale";
-      if (op_info->HasInputScale(input_scale_name, true))
-        param_.input_scale = op_info->GetInputScale(input_scale_name, true)[0];
-      if (op_info->HasInputScale(filter_scale_name, true))
-        param_.weight_scale = op_info->GetInputScale(filter_scale_name, true);
-      if (op_info->HasOutputScale(output_scale_name, true)) {
-        param_.output_scale =
-            op_info->GetOutputScale(output_scale_name, true)[0];
-      }
-    }
-
-    // conv3d: 3-pad to 6-pad, or conv2d: 2-pad to 4-pad
-    if (paddings.size() == 2L || paddings.size() == 3L) {
-      for (size_t i = 0; i < param_.strides.size(); ++i) {
-        int copy_pad = *(paddings.begin() + 2 * i);
-        paddings.insert(paddings.begin() + 2 * i + 1, copy_pad);
-      }
-    } else {
-      if (paddings.size() != 4L && paddings.size() != 6L) {
-        LOG(FATAL)
-            << "Paddings size should be the same or twice as the input size.";
-      }
-    }
     param_.paddings = std::make_shared<std::vector<int>>(paddings);
     return true;
   }

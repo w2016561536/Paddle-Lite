@@ -138,10 +138,10 @@ function build_opt {
       -DLITE_ON_MODEL_OPTIMIZE_TOOL=ON \
       -DWITH_TESTING=OFF \
       -DLITE_BUILD_EXTRA=ON \
-      -DWITH_MKL=OFF \
-      -DCMAKE_BUILD_TYPE=Debug \
-      -DCMAKE_C_FLAGS_DEBUG="-g3 -O0 -fno-omit-frame-pointer" \
-      -DCMAKE_CXX_FLAGS_DEBUG="-g3 -O0 -fno-omit-frame-pointer"
+      -DWITH_MKL=OFF 
+    #   -DCMAKE_BUILD_TYPE=Debug \
+    #   -DCMAKE_C_FLAGS_DEBUG="-g3 -O0 -fno-omit-frame-pointer" \
+    #   -DCMAKE_CXX_FLAGS_DEBUG="-g3 -O0 -fno-omit-frame-pointer"
     make opt -j$NUM_PROC
 }
 

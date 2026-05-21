@@ -373,6 +373,7 @@ struct ConvParam : ParamBase {
   lite::Tensor* residualData{nullptr};
   lite::Tensor* second_x{nullptr};
   lite::Tensor* output{};
+  lite::Tensor* conv2d_output{};
   std::vector<int> strides{1, 1};
   /* paddings type change
    * from std::vector<int> to std::shared_ptr<std::vector<int>>

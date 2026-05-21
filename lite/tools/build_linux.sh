@@ -108,7 +108,8 @@ readonly workspace=$PWD/$(dirname $0)/../../
 readonly CMAKE_COMMON_OPTIONS="-DWITH_LITE=ON \
                             -DCMAKE_BUILD_TYPE=Release \
                             -DWITH_MKLDNN=OFF \
-                            -DWITH_TESTING=OFF"
+                            -DWITH_TESTING=OFF \
+                            -DGFLAGS_NAMESPACE=google"
 
 # function of set options for benchmark
 function set_benchmark_options {

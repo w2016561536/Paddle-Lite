@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser.h"
+#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser_with_branch.h"
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -23,7 +23,7 @@ namespace lite {
 namespace mir {
 namespace fusion {
 
-void FpgaConvFuser::BuildPattern() { 
+void FpgaConvFuserWithBranch::BuildPattern() { 
 
   auto inputs_teller1 = [](const Node* node) -> bool { 
     // Conv2d + Bias 的输入输出条件，要求filter必须满足m*n*1*1
@@ -83,6 +83,8 @@ void FpgaConvFuser::BuildPattern() {
         op_is_conv2d = false;
         std::cout << "act_type: " << act_type << std::endl;
       }
+    }else{
+       return false;
     }
     if (!res){
       op_is_conv2d = false;
@@ -121,54 +123,50 @@ void FpgaConvFuser::BuildPattern() {
 
   // create nodes.
   auto* calibInput = VarNode("Input");
-  auto* calibOutput = VarNode("CalibOutput")->assert_only_one_output(); // 实际上就是conv的输入，与convInput等价
+  auto* calibOutput = VarNode("CalibOutput"); // 实际上就是conv的输入，与convInput等价
 
   auto* CalibNode = OpNode("calib", "calib");
   
   // auto* convInput = VarNode("Input")->assert_is_op_input("conv2d", "Input");
   auto* convNode = OpNode("conv2d", "conv2d")->assert_node_satisfied(inputs_teller1);
-  auto* convFilter = VarNode("ConvFilter")->assert_is_persistable_var();
-  auto* convBias = VarNode("ConvBias")->assert_is_persistable_var();
-  auto* convOutput = VarNode("ConvOutput")->assert_only_one_output();
+  auto* convFilter = VarNode("ConvFilter");
+  auto* convBias = VarNode("ConvBias");
+  // auto* Filter0_scale = VarNode("Filter0_scale")->assert_is_persistable_var();
+  auto* convOutput = VarNode("ConvOutput");
 
   auto* depthwise2dConvNode = OpNode("depthwise_conv2d", "depthwise_conv2d");
-  auto* depthwise2dConvFilter = VarNode("DepthwiseFilter")->assert_is_persistable_var();
-  auto* depthwise2dConvBias = VarNode("DepthwiseBias")->assert_is_persistable_var();
-  auto* depthwise2dConvOutput = VarNode("DepthwiseOutput")->assert_only_one_output();
+  auto* depthwise2dConvFilter = VarNode("DepthwiseFilter");
+  auto* depthwise2dConvBias = VarNode("DepthwiseBias");
+  auto* depthwise2dConvOutput = VarNode("DepthwiseOutput");
 
   auto* hard_swishNode = OpNode("hard_swish", "hard_swish") ->assert_node_satisfied(input_attr_teller);
   auto* hard_swishOutput = VarNode("Output");
-
-  calibInput->AsInput();
-  // Some op specialities.
-  calibOutput->AsIntermediate();
-  convNode->AsIntermediate();
-  CalibNode->AsIntermediate();
-  
-  convOutput->AsIntermediate();
-
-  depthwise2dConvOutput->AsIntermediate();
-  depthwise2dConvNode->AsIntermediate();
-
-  hard_swishNode->AsIntermediate();
-  hard_swishOutput->AsOutput();
 
   // create topology.
   std::vector<PMNode*> CalibNode_input{calibInput};
   std::vector<PMNode*> Conv2dNode_input{calibOutput, convFilter, convBias};
   std::vector<PMNode*> DepthwiseConv2dNode_input{convOutput, depthwise2dConvFilter, depthwise2dConvBias};
   std::vector<PMNode*> HardSwishNode_input{depthwise2dConvOutput};
-  
-
+  // mul_inputs >> *mul >> *mul_out;
   CalibNode_input >> *CalibNode >> *calibOutput;
+
+  // Some op specialities.
+  calibOutput->AsIntermediate();
+  convNode->AsIntermediate();
+  CalibNode->AsIntermediate();
+
   Conv2dNode_input >> *convNode >> *convOutput;
 
   DepthwiseConv2dNode_input >> *depthwise2dConvNode >> *depthwise2dConvOutput;
   HardSwishNode_input >> *hard_swishNode >> *hard_swishOutput;
 
+  convOutput->AsOutput(); // 这里，要求也输出conv2d的结果
+  depthwise2dConvOutput->AsIntermediate();
+  depthwise2dConvNode->AsIntermediate();
+  hard_swishNode->AsIntermediate();
 }
 
-void FpgaConvFuser::InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) {
+void FpgaConvFuserWithBranch::InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) {
   std::cout << "insert new node for conv2d" << std::endl;
   auto conv_op = matched.at("conv2d")->stmt()->op();
   auto* scope = conv_op->scope();
@@ -193,41 +191,18 @@ void FpgaConvFuser::InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) {
   IR_NODE_LINK_TO(matched.at("Input"), new_op_node);
   IR_NODE_LINK_TO(matched.at("ConvFilter"), new_op_node);
   IR_NODE_LINK_TO(matched.at("ConvBias"), new_op_node);
-  IR_NODE_LINK_TO(matched.at("DepthwiseFilter"), new_op_node);
-  IR_NODE_LINK_TO(matched.at("DepthwiseBias"), new_op_node);
+  IR_NODE_LINK_TO(matched.at("DepthwiseFilter"), new_op_node)
+  IR_NODE_LINK_TO(matched.at("DepthwiseBias"), new_op_node)
 
   IR_NODE_LINK_TO(new_op_node, matched.at("Output"));
+  IR_NODE_LINK_TO(new_op_node, matched.at("ConvOutput"));
 }
 
-cpp::OpDesc FpgaConvFuser::GenOpDesc(const key2nodes_t& matched) {
+cpp::OpDesc FpgaConvFuserWithBranch::GenOpDesc(const key2nodes_t& matched) {
   auto* conv_info = matched.at("conv2d")->stmt()->op_info();
   auto* calib_info = matched.at("calib")->stmt()->op_info();
   auto* depthwise_conv_info = matched.at("depthwise_conv2d")->stmt()->op_info();
   auto* hard_swish_info = matched.at("hard_swish")->stmt()->op_info();
-
-  std::cout << "calib Input: "
-          << calib_info->Input("Input").front() << std::endl;
-
-std::cout << "calib Output: "
-          << calib_info->Output("Out").front() << std::endl;
-
-std::cout << "conv Input: "
-          << conv_info->Input("Input").front() << std::endl;
-
-std::cout << "conv Output: "
-          << conv_info->Output("Output").front() << std::endl;
-
-std::cout << "depthwise Input: "
-          << depthwise_conv_info->Input("Input").front() << std::endl;
-
-std::cout << "depthwise Output: "
-          << depthwise_conv_info->Output("Output").front() << std::endl;
-
-std::cout << "hard_swish Input: "
-          << hard_swish_info->Input("X").front() << std::endl;
-
-std::cout << "hard_swish Output: "
-          << hard_swish_info->Output("Out").front() << std::endl;
 
   cpp::OpDesc op_desc;
   op_desc.SetType("calib_conv2d");
@@ -248,6 +223,8 @@ std::cout << "hard_swish Output: "
 
   // 3. 输出使用 conv2d 的最终输出
   op_desc.SetOutput("Output", hard_swish_info->Output("Out"));
+  op_desc.SetAttr("need_conv2d_output", true);
+  op_desc.SetOutput("Output_Conv2d",conv_info->Output("Output"));
 
 
   // 如果 calib 的 scale 是 attr，而不是 input，也要保留
@@ -272,7 +249,6 @@ std::cout << "hard_swish Output: "
     op_desc.SetAttr("depthwise_scale", depthwise_conv_info->GetAttr<std::vector<float>>("Input0_scale"));
   }
 
-  // op_desc.SetAttr("bit_length", conv_info->GetAttr<int>("bit_length"));
   op_desc.SetAttr("dilations", depthwise_conv_info->GetAttr<std::vector<int>>("dilations"));
   op_desc.SetAttr("groups", depthwise_conv_info->GetAttr<int>("groups"));
   op_desc.SetAttr("padding_algorithm",
@@ -280,7 +256,8 @@ std::cout << "hard_swish Output: "
 
   op_desc.SetAttr("strides", depthwise_conv_info->GetAttr<std::vector<int>>("strides"));
   op_desc.SetAttr("paddings", depthwise_conv_info->GetAttr<std::vector<int>>("paddings"));
-  op_desc.SetAttr("need_conv2d_output", false);
+  
+
   return op_desc;
 }
 

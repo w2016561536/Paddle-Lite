@@ -12,30 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuse_pass.h"
-#include <list>
+#pragma once
+
 #include <memory>
-#include <vector>
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser.h"
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser_with_branch.h"
-#include "lite/core/optimizer/mir/pass_registry.h"
+#include <string>
+#include "lite/core/optimizer/mir/pattern_matcher_high_api.h"
 
 namespace paddle {
 namespace lite {
 namespace mir {
+namespace fusion {
 
-void FpgaConvFusePass::Apply(const std::unique_ptr<SSAGraph>& graph) {
-      std::cout << "apply fpga conv fuse pass" << std::endl;
-      fusion::FpgaConvFuser fuser("", "");
-      fuser(graph.get());
-      // fusion::FpgaConvFuserWithBranch fuser1("", "");
-      // fuser1(graph.get());
-}
+class FpgaConvFuserWithBranch : public FuseBase {
+ public:
+  explicit FpgaConvFuserWithBranch(std::string op_type, std::string act_type)
+      : op_type_(op_type), act_type_(act_type) {}
+  void BuildPattern() override;
+  void InsertNewNode(SSAGraph* graph, const key2nodes_t& matched) override;
 
+ private:
+  cpp::OpDesc GenOpDesc(const key2nodes_t& matched) override;
+  std::string op_type_;
+  std::string act_type_;
+};
+
+}  // namespace fusion
 }  // namespace mir
 }  // namespace lite
 }  // namespace paddle
-
-REGISTER_MIR_PASS(fpga_conv_fuse_pass, paddle::lite::mir::FpgaConvFusePass)
-    .BindTargets({TARGET(kAny)});
-    // .BindKernel("calib_conv2d");

@@ -217,11 +217,11 @@ std::unique_ptr<RuntimeProgram> RunDefaultOptimizer(
        // inputs and outputs must have the same scale.
        "restrict_quantized_op_with_same_input_output_scale_pass",
        "quantization_parameters_removal_pass",
-       "nnadapter_subgraph_pass",
-       "npu_subgraph_pass",
-       "bm_subgraph_pass",
-       "mlu_subgraph_pass",
-       "fpga_concat_fuse_pass",
+       //"nnadapter_subgraph_pass",
+       //"npu_subgraph_pass",
+       //"bm_subgraph_pass",
+       //"mlu_subgraph_pass",
+       //"fpga_concat_fuse_pass",
        "control_flow_op_unused_inputs_and_outputs_eliminate_pass",
        "static_kernel_pick_pass",  // pick original kernel from graph
 #ifdef LITE_WITH_XPU
@@ -231,7 +231,7 @@ std::unique_ptr<RuntimeProgram> RunDefaultOptimizer(
        "remove_tf_redundant_ops_pass",
        "variable_place_inference_pass",  // inference arg/var's
        "control_flow_op_shared_inputs_and_outputs_place_sync_pass",
-       "__fpga_kernel_place_correct_pass",
+       //"__fpga_kernel_place_correct_pass",
        // "opencl_kernel_place_correct_pass", // uncommit this pass
        "mlu_postprocess_pass",
        // info(target/precision/layout/device)
@@ -269,12 +269,13 @@ std::unique_ptr<RuntimeProgram> RunDefaultOptimizer(
 
        "runtime_context_assign_pass",
        "argument_type_display_pass",
-       "lite_inplace_fuse_pass",
+       //"lite_inplace_fuse_pass",
 #if !(defined(LITE_WITH_FPGA) || defined(LITE_WITH_PRECISION_PROFILE))
-       "memory_optimize_pass",
-       "xpu_memory_optimize_pass",
+       //"memory_optimize_pass",
+       //"xpu_memory_optimize_pass",
 #endif
-        "fpga_conv_fuse_pass"
+        "fpga_conv_fuse_pass",
+        "fpga_conv_fuse_pass_with_branch"
       }};
 
   // skip the discarded pass

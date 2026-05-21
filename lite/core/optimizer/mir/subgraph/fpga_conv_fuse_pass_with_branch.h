@@ -12,30 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuse_pass.h"
-#include <list>
+#pragma once
+
 #include <memory>
-#include <vector>
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser.h"
-#include "lite/core/optimizer/mir/subgraph/fpga_conv_fuser_with_branch.h"
-#include "lite/core/optimizer/mir/pass_registry.h"
+#include <string>
+#include "lite/core/optimizer/mir/pass.h"
 
 namespace paddle {
 namespace lite {
 namespace mir {
 
-void FpgaConvFusePass::Apply(const std::unique_ptr<SSAGraph>& graph) {
-      std::cout << "apply fpga conv fuse pass" << std::endl;
-      fusion::FpgaConvFuser fuser("", "");
-      fuser(graph.get());
-      // fusion::FpgaConvFuserWithBranch fuser1("", "");
-      // fuser1(graph.get());
-}
+class FpgaConvFusePassWithBranch : public ProgramPass {
+ public:
+  void Apply(const std::unique_ptr<SSAGraph>& graph) override;
+};
 
 }  // namespace mir
 }  // namespace lite
 }  // namespace paddle
-
-REGISTER_MIR_PASS(fpga_conv_fuse_pass, paddle::lite::mir::FpgaConvFusePass)
-    .BindTargets({TARGET(kAny)});
-    // .BindKernel("calib_conv2d");

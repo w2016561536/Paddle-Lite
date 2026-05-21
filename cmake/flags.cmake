@@ -120,6 +120,8 @@ set(COMMON_FLAGS
     -fPIC
     -fno-omit-frame-pointer
     -Werror
+    -Wno-error=sign-compare
+    -Wno-error=deprecated-copy
     -Wall
     -Wextra
     -Wnon-virtual-dtor
@@ -171,6 +173,8 @@ if(LINUX)
         -Wall
         -Wextra
         -Werror
+        -Wno-error=sign-compare
+        -Wno-error=deprecated-copy
         ${GPU_COMMON_FLAGS})
 endif(LINUX)
 

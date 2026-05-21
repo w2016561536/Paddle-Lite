@@ -87,6 +87,7 @@ REGISTER_LITE_KERNEL(calib_conv2d, kIntelFPGA, kFloat, kNCHW, ConvFp32, def)
     .BindInput("Bias", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindInput("Filter", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindOutput("Output", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindOutput("Output_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindPaddleOpVersion("calib_conv2d", 1)
     .Finalize();
 
