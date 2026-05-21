@@ -28,19 +28,16 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
   virtual void PrepareForRun();
 
   virtual void ReInitWhenNeeded() {
-    CHECK(impl_);
-    impl_->ReInitWhenNeeded();
+    // CHECK(impl_);
+    // impl_->ReInitWhenNeeded();
   }
 
-  virtual void Run() {
-    CHECK(impl_);
-    impl_->Run();
-  }
+  virtual void Run();
 
   ~CalibConv2dCompute() {
-    if (impl_ != nullptr) {
-      delete impl_;
-    }
+    // if (impl_ != nullptr) {
+    //   delete impl_;
+    // }
   }
 
  private:

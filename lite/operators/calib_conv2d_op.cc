@@ -84,27 +84,37 @@ bool CalibConv2dOpLite::InferShapeImpl() const {
   const auto in_dims = param_.x->dims();
   const auto filter_dims = param_.filter->dims();
 
-  UpdatePaddingAndDilation(param_.paddings.get(),
-                           param_.dilations.get(),
-                           param_.strides,
-                           padding_algorithm_,
-                           in_dims,
-                           filter_dims);
-  std::vector<int64_t> output_shape({in_dims[0], filter_dims[0]});
-  auto paddings = *param_.paddings;
-  auto dilations = *param_.dilations;
+  std::vector<int64_t> output_shape_conv2d({in_dims[0], filter_dims[0]});
   for (size_t i = 0; i < param_.strides.size(); ++i) {
-    output_shape.push_back(ConvOutputSize(in_dims[i + 2],
+    output_shape_conv2d.push_back(ConvOutputSize(in_dims[i + 2],
                                           filter_dims[i + 2],
-                                          dilations[i],
-                                          paddings[i * 2],
-                                          paddings[i * 2 + 1],
-                                          param_.strides[i]));
+                                          1,
+                                          0,
+                                          0,
+                                          1));
   }
 
   // Set output dims
-  param_.output->Resize(lite::DDim(output_shape));
+  param_.conv2d_output->Resize(lite::DDim(output_shape_conv2d));
   // share LoD
+  param_.conv2d_output->set_lod(param_.x->lod());
+
+  // 计算depthwise_conv2d
+  const auto depthwise_filter_dims = param_.depthwise_filter->dims();
+  std::vector<int64_t> output_shape_depthwise2d({output_shape_conv2d[0], depthwise_filter_dims[0]});
+  auto paddings = *param_.paddings;
+  auto dilations = *param_.dilations;
+  for (size_t i = 0; i < param_.strides.size(); ++i) { 
+    output_shape_depthwise2d.push_back(
+            ConvOutputSize(output_shape_conv2d[i + 2], 
+                          depthwise_filter_dims[i + 2], 
+                          dilations[i], 
+                          paddings[i * 2], 
+                          paddings[i * 2 + 1], 
+                          param_.strides[i])); 
+  }
+
+  param_.output->Resize(lite::DDim(output_shape_depthwise2d));
   param_.output->set_lod(param_.x->lod());
 
   return true;
