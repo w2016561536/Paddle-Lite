@@ -70,40 +70,160 @@ class CalibConv2dOpLite : public OpLite {
 
   // TODO(Superjomn) replace framework::OpDesc with a lite one.
   bool AttachImpl(const cpp::OpDesc& op_desc, lite::Scope* scope) override {
-    auto Input = op_desc.Input("Input").front();
-    auto Filter = op_desc.Input("Filter_Conv2d").front();
-    auto Filter1 = op_desc.Input("Filter_Depthwise_Conv2d").front();
-    auto Bias = op_desc.Input("Bias_Conv2d").front();
-    auto Bias1 = op_desc.Input("Bias_Depthwise_Conv2d").front();
-    auto Out = op_desc.Output("Output").front();
+  // -----------------------------
+  // Required inputs / outputs
+  // -----------------------------
+  auto input_vec = op_desc.Input("Input");
+  auto filter_vec = op_desc.Input("Filter_Conv2d");
+  auto dw_filter_vec = op_desc.Input("Filter_Depthwise_Conv2d");
+  auto out_vec = op_desc.Output("Output");
 
-    if (op_desc.HasAttr("need_conv2d_output") && op_desc.GetAttr<bool>("need_conv2d_output") == true){
-      auto Out_conv2d = op_desc.Output("Output_Conv2d").front();
-      param_.conv2d_output = scope->FindVar(Out_conv2d)->GetMutable<lite::Tensor>();
-      output_tensor_ptrs_cache_.push_back(param_.conv2d_output);
-    }
+  CHECK(!input_vec.empty()) << "Input is empty";
+  CHECK(!filter_vec.empty()) << "Filter_Conv2d is empty";
+  CHECK(!dw_filter_vec.empty()) << "Filter_Depthwise_Conv2d is empty";
+  CHECK(!out_vec.empty()) << "Output is empty";
 
-    param_.x = scope->FindVar(Input)->GetMutable<lite::Tensor>();
-    param_.filter = scope->FindVar(Filter)->GetMutable<lite::Tensor>();
-    param_.depthwise_filter = scope->FindVar(Filter1)->GetMutable<lite::Tensor>();
+  auto Input = input_vec.front();
+  auto Filter = filter_vec.front();
+  auto Filter1 = dw_filter_vec.front();
+  auto Out = out_vec.front();
+
+  CHECK(scope->FindVar(Input)) << "Cannot find Input var: " << Input;
+  CHECK(scope->FindVar(Filter)) << "Cannot find Filter_Conv2d var: " << Filter;
+  CHECK(scope->FindVar(Filter1))
+      << "Cannot find Filter_Depthwise_Conv2d var: " << Filter1;
+  CHECK(scope->FindVar(Out)) << "Cannot find Output var: " << Out;
+
+  param_.x = scope->FindVar(Input)->GetMutable<lite::Tensor>();
+  param_.filter = scope->FindVar(Filter)->GetMutable<lite::Tensor>();
+  param_.depthwise_filter =
+      scope->FindVar(Filter1)->GetMutable<lite::Tensor>();
+  param_.output = scope->FindVar(Out)->GetMutable<lite::Tensor>();
+
+  CHECK(param_.x);
+  CHECK(param_.filter);
+  CHECK(param_.depthwise_filter);
+  CHECK(param_.output);
+
+  // -----------------------------
+  // Optional bias inputs
+  // -----------------------------
+  param_.bias = nullptr;
+  auto bias_vec = op_desc.Input("Bias_Conv2d");
+  if (!bias_vec.empty() && !bias_vec.front().empty()) {
+    auto Bias = bias_vec.front();
+    CHECK(scope->FindVar(Bias)) << "Cannot find Bias_Conv2d var: " << Bias;
     param_.bias = scope->FindVar(Bias)->GetMutable<lite::Tensor>();
-    param_.depthwise_bias = scope->FindVar(Bias1)->GetMutable<lite::Tensor>();
-    param_.output = scope->FindVar(Out)->GetMutable<lite::Tensor>();
-    // CHECK(param_.x);
-    // CHECK(param_.filter);
-    // CHECK(param_.output);
-    input_tensor_ptrs_cache_.push_back(param_.x);
-    output_tensor_ptrs_cache_.push_back(param_.output);
-
-    param_.strides = op_desc.GetAttr<std::vector<int>>("strides");
-    std::vector<int> paddings = op_desc.GetAttr<std::vector<int>>("paddings");
-    param_.groups = op_desc.GetAttr<int>("groups");
-    auto dilations = op_desc.GetAttr<std::vector<int>>("dilations");
-    param_.dilations = std::make_shared<std::vector<int>>(dilations);
-
-    param_.paddings = std::make_shared<std::vector<int>>(paddings);
-    return true;
+    CHECK(param_.bias);
   }
+
+  param_.depthwise_bias = nullptr;
+  auto dw_bias_vec = op_desc.Input("Bias_Depthwise_Conv2d");
+  if (!dw_bias_vec.empty() && !dw_bias_vec.front().empty()) {
+    auto Bias1 = dw_bias_vec.front();
+    CHECK(scope->FindVar(Bias1))
+        << "Cannot find Bias_Depthwise_Conv2d var: " << Bias1;
+    param_.depthwise_bias =
+        scope->FindVar(Bias1)->GetMutable<lite::Tensor>();
+    CHECK(param_.depthwise_bias);
+  }
+
+  // -----------------------------
+  // Optional conv2d_output
+  // -----------------------------
+  param_.need_conv2d_output = false;
+  param_.conv2d_output = nullptr;
+
+  if (op_desc.HasAttr("need_conv2d_output")) {
+    param_.need_conv2d_output =
+        op_desc.GetAttr<bool>("need_conv2d_output");
+  }
+
+  if (param_.need_conv2d_output) {
+    auto conv_out_vec = op_desc.Output("Output_Conv2d");
+    CHECK(!conv_out_vec.empty()) << "need_conv2d_output=true, "
+                                 << "but Output_Conv2d is empty";
+
+    auto OutConv2d = conv_out_vec.front();
+    CHECK(!OutConv2d.empty()) << "Output_Conv2d name is empty";
+    CHECK(scope->FindVar(OutConv2d))
+        << "Cannot find Output_Conv2d var: " << OutConv2d;
+
+    param_.conv2d_output =
+        scope->FindVar(OutConv2d)->GetMutable<lite::Tensor>();
+    CHECK(param_.conv2d_output);
+
+    output_tensor_ptrs_cache_.push_back(param_.conv2d_output);
+  }
+
+  // -----------------------------
+  // Depthwise attrs
+  // 注意：这些只给 depthwise_conv2d 用
+  // -----------------------------
+  CHECK(op_desc.HasAttr("strides"));
+  param_.strides = op_desc.GetAttr<std::vector<int>>("strides");
+  CHECK_EQ(param_.strides.size(), 2);
+
+  CHECK(op_desc.HasAttr("paddings"));
+  auto paddings = op_desc.GetAttr<std::vector<int>>("paddings");
+  CHECK(paddings.size() == 2 || paddings.size() == 4);
+  param_.paddings = std::make_shared<std::vector<int>>(paddings);
+
+  CHECK(op_desc.HasAttr("dilations"));
+  auto dilations = op_desc.GetAttr<std::vector<int>>("dilations");
+  CHECK_EQ(dilations.size(), 2);
+  param_.dilations = std::make_shared<std::vector<int>>(dilations);
+
+  CHECK(op_desc.HasAttr("groups"));
+  param_.groups = op_desc.GetAttr<int>("groups");
+
+  // -----------------------------
+  // Quant attrs
+  // -----------------------------
+  CHECK(op_desc.HasAttr("calib_scale"));
+  param_.calib_scale = op_desc.GetAttr<float>("calib_scale");
+  CHECK_GT(param_.calib_scale, 0.f);
+
+  CHECK(op_desc.HasAttr("Conv2d_Filter0_scale"));
+  param_.Conv2d_Filter0_scale =
+      op_desc.GetAttr<std::vector<float>>("Conv2d_Filter0_scale");
+  CHECK(!param_.Conv2d_Filter0_scale.empty());
+
+  CHECK(op_desc.HasAttr("depthwise_scale"));
+  param_.depthwise_scale = op_desc.GetAttr<std::vector<float>>("depthwise_scale")[0];
+  CHECK_GT(param_.depthwise_scale, 0.f);
+
+  CHECK(op_desc.HasAttr("Depthwise2d_Filter0_scale"));
+  param_.Depthwise2d_Filter0_scale =
+      op_desc.GetAttr<std::vector<float>>("Depthwise2d_Filter0_scale");
+  CHECK(!param_.Depthwise2d_Filter0_scale.empty());
+
+  if (op_desc.HasAttr("fuse_relu_before_depthwise_conv")) {
+    param_.fuse_relu_before_depthwise_conv =
+        op_desc.GetAttr<bool>("fuse_relu_before_depthwise_conv");
+  } else {
+    param_.fuse_relu_before_depthwise_conv = false;
+  }
+
+  // -----------------------------
+  // Cache tensors
+  // -----------------------------
+  input_tensor_ptrs_cache_.push_back(param_.x);
+  input_tensor_ptrs_cache_.push_back(param_.filter);
+  input_tensor_ptrs_cache_.push_back(param_.depthwise_filter);
+
+  if (param_.bias) {
+    input_tensor_ptrs_cache_.push_back(param_.bias);
+  }
+
+  if (param_.depthwise_bias) {
+    input_tensor_ptrs_cache_.push_back(param_.depthwise_bias);
+  }
+
+  output_tensor_ptrs_cache_.push_back(param_.output);
+
+  return true;
+}
 
   void AttachKernel(KernelBase* kernel) override { kernel->SetParam(param_); }
 

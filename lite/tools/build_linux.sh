@@ -73,7 +73,7 @@ KUNLUNXIN_XPU_XRE_URL=""
 KUNLUNXIN_XPU_SDK_ENV=""
 KUNLUNXIN_XPU_SDK_ROOT=""
 # options of compiling intel fpga.
-WITH_INTEL_FPGA=OFF
+WITH_INTEL_FPGA=ON
 INTEL_FPGA_SDK_ROOT="$(pwd)/intel_fpga_sdk"
 # options of adding training ops
 WITH_TRAIN=OFF
@@ -106,10 +106,9 @@ readonly THIRDPARTY_TAR=third-party-91a9ab3.tar.gz
 readonly workspace=$PWD/$(dirname $0)/../../
 # basic options for linux compiling.
 readonly CMAKE_COMMON_OPTIONS="-DWITH_LITE=ON \
-                            -DCMAKE_BUILD_TYPE=Release \
+                            -DCMAKE_BUILD_TYPE=Debug \
                             -DWITH_MKLDNN=OFF \
-                            -DWITH_TESTING=OFF \
-                            -DGFLAGS_NAMESPACE=google"
+                            -DWITH_TESTING=OFF"
 
 # function of set options for benchmark
 function set_benchmark_options {

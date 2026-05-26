@@ -388,6 +388,11 @@ struct ConvParam : ParamBase {
    * let kernel param and operator param Synchronous update
    */
   std::shared_ptr<std::vector<int>> dilations;
+  float calib_scale;
+  std::vector<float> Conv2d_Filter0_scale;
+  float depthwise_scale;
+  std::vector<float> Depthwise2d_Filter0_scale;
+  bool need_conv2d_output;
   bool fuse_relu_before_depthwise_conv{false};
   bool use_mkldnn{false};
   bool fuse_relu{false};  // only used in mkldnn kernel
