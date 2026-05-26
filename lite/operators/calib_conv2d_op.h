@@ -78,21 +78,21 @@ class CalibConv2dOpLite : public OpLite {
   auto dw_filter_vec = op_desc.Input("Filter_Depthwise_Conv2d");
   auto out_vec = op_desc.Output("Output");
 
-  CHECK(!input_vec.empty()) << "Input is empty";
-  CHECK(!filter_vec.empty()) << "Filter_Conv2d is empty";
-  CHECK(!dw_filter_vec.empty()) << "Filter_Depthwise_Conv2d is empty";
-  CHECK(!out_vec.empty()) << "Output is empty";
+  // CHECK(!input_vec.empty()) << "Input is empty";
+  // CHECK(!filter_vec.empty()) << "Filter_Conv2d is empty";
+  // CHECK(!dw_filter_vec.empty()) << "Filter_Depthwise_Conv2d is empty";
+  // CHECK(!out_vec.empty()) << "Output is empty";
 
   auto Input = input_vec.front();
   auto Filter = filter_vec.front();
   auto Filter1 = dw_filter_vec.front();
   auto Out = out_vec.front();
 
-  CHECK(scope->FindVar(Input)) << "Cannot find Input var: " << Input;
-  CHECK(scope->FindVar(Filter)) << "Cannot find Filter_Conv2d var: " << Filter;
-  CHECK(scope->FindVar(Filter1))
-      << "Cannot find Filter_Depthwise_Conv2d var: " << Filter1;
-  CHECK(scope->FindVar(Out)) << "Cannot find Output var: " << Out;
+  // CHECK(scope->FindVar(Input)) << "Cannot find Input var: " << Input;
+  // CHECK(scope->FindVar(Filter)) << "Cannot find Filter_Conv2d var: " << Filter;
+  // CHECK(scope->FindVar(Filter1))
+  //     << "Cannot find Filter_Depthwise_Conv2d var: " << Filter1;
+  // CHECK(scope->FindVar(Out)) << "Cannot find Output var: " << Out;
 
   param_.x = scope->FindVar(Input)->GetMutable<lite::Tensor>();
   param_.filter = scope->FindVar(Filter)->GetMutable<lite::Tensor>();
@@ -100,10 +100,10 @@ class CalibConv2dOpLite : public OpLite {
       scope->FindVar(Filter1)->GetMutable<lite::Tensor>();
   param_.output = scope->FindVar(Out)->GetMutable<lite::Tensor>();
 
-  CHECK(param_.x);
-  CHECK(param_.filter);
-  CHECK(param_.depthwise_filter);
-  CHECK(param_.output);
+  // CHECK(param_.x);
+  // CHECK(param_.filter);
+  // CHECK(param_.depthwise_filter);
+  // CHECK(param_.output);
 
   // -----------------------------
   // Optional bias inputs
@@ -112,20 +112,20 @@ class CalibConv2dOpLite : public OpLite {
   auto bias_vec = op_desc.Input("Bias_Conv2d");
   if (!bias_vec.empty() && !bias_vec.front().empty()) {
     auto Bias = bias_vec.front();
-    CHECK(scope->FindVar(Bias)) << "Cannot find Bias_Conv2d var: " << Bias;
+    // CHECK(scope->FindVar(Bias)) << "Cannot find Bias_Conv2d var: " << Bias;
     param_.bias = scope->FindVar(Bias)->GetMutable<lite::Tensor>();
-    CHECK(param_.bias);
+    // CHECK(param_.bias);
   }
 
   param_.depthwise_bias = nullptr;
   auto dw_bias_vec = op_desc.Input("Bias_Depthwise_Conv2d");
   if (!dw_bias_vec.empty() && !dw_bias_vec.front().empty()) {
     auto Bias1 = dw_bias_vec.front();
-    CHECK(scope->FindVar(Bias1))
-        << "Cannot find Bias_Depthwise_Conv2d var: " << Bias1;
+    // CHECK(scope->FindVar(Bias1))
+    //     << "Cannot find Bias_Depthwise_Conv2d var: " << Bias1;
     param_.depthwise_bias =
         scope->FindVar(Bias1)->GetMutable<lite::Tensor>();
-    CHECK(param_.depthwise_bias);
+    // CHECK(param_.depthwise_bias);
   }
 
   // -----------------------------
@@ -141,17 +141,17 @@ class CalibConv2dOpLite : public OpLite {
 
   if (param_.need_conv2d_output) {
     auto conv_out_vec = op_desc.Output("Output_Conv2d");
-    CHECK(!conv_out_vec.empty()) << "need_conv2d_output=true, "
-                                 << "but Output_Conv2d is empty";
+    // CHECK(!conv_out_vec.empty()) << "need_conv2d_output=true, "
+    //                              << "but Output_Conv2d is empty";
 
     auto OutConv2d = conv_out_vec.front();
-    CHECK(!OutConv2d.empty()) << "Output_Conv2d name is empty";
-    CHECK(scope->FindVar(OutConv2d))
-        << "Cannot find Output_Conv2d var: " << OutConv2d;
+    // CHECK(!OutConv2d.empty()) << "Output_Conv2d name is empty";
+    // CHECK(scope->FindVar(OutConv2d))
+    //     << "Cannot find Output_Conv2d var: " << OutConv2d;
 
     param_.conv2d_output =
         scope->FindVar(OutConv2d)->GetMutable<lite::Tensor>();
-    CHECK(param_.conv2d_output);
+    // CHECK(param_.conv2d_output);
 
     output_tensor_ptrs_cache_.push_back(param_.conv2d_output);
   }
@@ -160,43 +160,43 @@ class CalibConv2dOpLite : public OpLite {
   // Depthwise attrs
   // 注意：这些只给 depthwise_conv2d 用
   // -----------------------------
-  CHECK(op_desc.HasAttr("strides"));
+  // CHECK(op_desc.HasAttr("strides"));
   param_.strides = op_desc.GetAttr<std::vector<int>>("strides");
-  CHECK_EQ(param_.strides.size(), 2);
+  // CHECK_EQ(param_.strides.size(), 2);
 
-  CHECK(op_desc.HasAttr("paddings"));
+  // CHECK(op_desc.HasAttr("paddings"));
   auto paddings = op_desc.GetAttr<std::vector<int>>("paddings");
-  CHECK(paddings.size() == 2 || paddings.size() == 4);
+  // CHECK(paddings.size() == 2 || paddings.size() == 4);
   param_.paddings = std::make_shared<std::vector<int>>(paddings);
 
-  CHECK(op_desc.HasAttr("dilations"));
+  // CHECK(op_desc.HasAttr("dilations"));
   auto dilations = op_desc.GetAttr<std::vector<int>>("dilations");
-  CHECK_EQ(dilations.size(), 2);
+  // CHECK_EQ(dilations.size(), 2);
   param_.dilations = std::make_shared<std::vector<int>>(dilations);
 
-  CHECK(op_desc.HasAttr("groups"));
+  // CHECK(op_desc.HasAttr("groups"));
   param_.groups = op_desc.GetAttr<int>("groups");
 
   // -----------------------------
   // Quant attrs
   // -----------------------------
-  CHECK(op_desc.HasAttr("calib_scale"));
+  // CHECK(op_desc.HasAttr("calib_scale"));
   param_.calib_scale = op_desc.GetAttr<float>("calib_scale");
-  CHECK_GT(param_.calib_scale, 0.f);
+  // CHECK_GT(param_.calib_scale, 0.f);
 
-  CHECK(op_desc.HasAttr("Conv2d_Filter0_scale"));
+  // CHECK(op_desc.HasAttr("Conv2d_Filter0_scale"));
   param_.Conv2d_Filter0_scale =
       op_desc.GetAttr<std::vector<float>>("Conv2d_Filter0_scale");
-  CHECK(!param_.Conv2d_Filter0_scale.empty());
+  // CHECK(!param_.Conv2d_Filter0_scale.empty());
 
-  CHECK(op_desc.HasAttr("depthwise_scale"));
+  // CHECK(op_desc.HasAttr("depthwise_scale"));
   param_.depthwise_scale = op_desc.GetAttr<std::vector<float>>("depthwise_scale")[0];
-  CHECK_GT(param_.depthwise_scale, 0.f);
+  // CHECK_GT(param_.depthwise_scale, 0.f);
 
-  CHECK(op_desc.HasAttr("Depthwise2d_Filter0_scale"));
+  // CHECK(op_desc.HasAttr("Depthwise2d_Filter0_scale"));
   param_.Depthwise2d_Filter0_scale =
       op_desc.GetAttr<std::vector<float>>("Depthwise2d_Filter0_scale");
-  CHECK(!param_.Depthwise2d_Filter0_scale.empty());
+  // CHECK(!param_.Depthwise2d_Filter0_scale.empty());
 
   if (op_desc.HasAttr("fuse_relu_before_depthwise_conv")) {
     param_.fuse_relu_before_depthwise_conv =

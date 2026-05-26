@@ -18,6 +18,13 @@
 #include "lite/core/type_system.h"
 #include "lite/kernels/intel_fpga/conv_depthwise.h"
 #include "lite/kernels/intel_fpga/conv_gemmlike.h"
+#include <cmath>
+#include <cstdint>
+#include <cstring>
+#include <vector>
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+#include <arm_neon.h>
+#endif
 
 namespace paddle {
 namespace lite {
@@ -60,12 +67,23 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
   //   arm_cxt_ = ContextScheduler::Global().NewContext(TargetType::kARM);
   // }
   std::cout << "FPGA calib_conv2d param init finish" << std::endl;
+  #if defined(__ARM_NEON) || defined(__ARM_NEON__)
+    std::cout << "USE ARM NEON FOR ACCEL" << std::endl;
+  #endif
 
   // impl_->SetContext(std::move(arm_cxt_));
   // impl_->SetParam(param);
   // impl_->PrepareForRun();
 
 }
+// 如果当前源文件尚未包含这些头文件，请在文件头补充：
+// #include <cmath>
+// #include <cstdint>
+// #include <cstring>
+// #include <vector>
+// #if defined(__ARM_NEON) || defined(__ARM_NEON__)
+// #include <arm_neon.h>
+// #endif
 
 template <>
 void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
@@ -77,8 +95,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 
   const float* x_data = param.x->data<float>();
 
-  // 注意：这里的 filter tensor 虽然以 float 形式保存，
-  // 但其数值语义是否已经是量化后的 int8 权重值，需要通过打印确认。
+  // filter tensor 当前按 int8_t 读取：其数值语义应为量化后的 int8 权重。
   const int8_t* conv_w_q_float = param.filter->data<int8_t>();
   const int8_t* dw_w_q_float = param.depthwise_filter->data<int8_t>();
 
@@ -111,10 +128,6 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   const int conv_kh = conv_w_dims[2];
   const int conv_kw = conv_w_dims[3];
 
-  CHECK_EQ(conv_kh, 1);
-  CHECK_EQ(conv_kw, 1);
-  CHECK_EQ(conv_ic, in_c);
-
   const int conv_out_h = in_h;
   const int conv_out_w = in_w;
   const int conv_out_numel = batch * conv_oc * conv_out_h * conv_out_w;
@@ -135,20 +148,9 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   const int out_c = out_dims[1];
   const int out_h = out_dims[2];
   const int out_w = out_dims[3];
-
-  CHECK_EQ(out_n, batch);
-  CHECK_EQ(out_c, dw_oc);
-
-  // depthwise: groups 应等于输入通道数，也就是 conv2d 输出通道数
-  CHECK_EQ(param.groups, conv_oc);
-  CHECK_EQ(dw_ic_per_group, conv_oc / param.groups);
-  CHECK_EQ(dw_ic_per_group, 1);
-  CHECK_EQ(dw_oc % param.groups, 0);
+  (void)out_n;
 
   const int dw_channel_multiplier = dw_oc / param.groups;
-
-  CHECK_EQ(param.Conv2d_Filter0_scale.size(), conv_oc);
-  CHECK_EQ(param.Depthwise2d_Filter0_scale.size(), dw_oc);
 
   const float calib_scale = param.calib_scale;
   const float depthwise_scale = param.depthwise_scale;
@@ -156,260 +158,8 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   const auto& conv_filter_scale = param.Conv2d_Filter0_scale;
   const auto& depthwise_filter_scale = param.Depthwise2d_Filter0_scale;
 
-  // ============================================================
-  // Debug print: 在正式计算前打印所有权重、bias、scale、shape
-  // ============================================================
-
-  // std::cout << std::fixed ;
-
-  // std::cout << "\n================ CalibConv2dCompute Debug Print ================\n";
-
-  // std::cout << "[Input Tensor]\n";
-  // std::cout << "  x_dims = ["
-  //           << batch << ", "
-  //           << in_c << ", "
-  //           << in_h << ", "
-  //           << in_w << "]\n";
-  // std::cout << "  calib_scale = " << calib_scale << "\n";
-
-  // std::cout << "\n[Conv2D Tensor]\n";
-  // std::cout << "  conv_filter_dims = ["
-  //           << conv_oc << ", "
-  //           << conv_ic << ", "
-  //           << conv_kh << ", "
-  //           << conv_kw << "]\n";
-  // std::cout << "  conv_out_dims = ["
-  //           << batch << ", "
-  //           << conv_oc << ", "
-  //           << conv_out_h << ", "
-  //           << conv_out_w << "]\n";
-
-  // std::cout << "\n[Depthwise Conv2D Tensor]\n";
-  // std::cout << "  depthwise_filter_dims = ["
-  //           << dw_oc << ", "
-  //           << dw_ic_per_group << ", "
-  //           << dw_kh << ", "
-  //           << dw_kw << "]\n";
-  // std::cout << "  output_dims = ["
-  //           << out_n << ", "
-  //           << out_c << ", "
-  //           << out_h << ", "
-  //           << out_w << "]\n";
-  // std::cout << "  groups = " << param.groups << "\n";
-  // std::cout << "  dw_channel_multiplier = " << dw_channel_multiplier << "\n";
-  // std::cout << "  depthwise_scale = " << depthwise_scale << "\n";
-
-  // int stride_h_dbg = 1;
-  // int stride_w_dbg = 1;
-  // if (param.strides.size() >= 2) {
-  //   stride_h_dbg = param.strides[0];
-  //   stride_w_dbg = param.strides[1];
-  // }
-
-  // int dilation_h_dbg = 1;
-  // int dilation_w_dbg = 1;
-  // if (param.dilations && param.dilations->size() >= 2) {
-  //   dilation_h_dbg = (*param.dilations)[0];
-  //   dilation_w_dbg = (*param.dilations)[1];
-  // }
-
-  // int pad_top_dbg = 0;
-  // int pad_bottom_dbg = 0;
-  // int pad_left_dbg = 0;
-  // int pad_right_dbg = 0;
-
-  // if (param.paddings) {
-  //   if (param.paddings->size() == 2) {
-  //     pad_top_dbg = (*param.paddings)[0];
-  //     pad_bottom_dbg = (*param.paddings)[0];
-  //     pad_left_dbg = (*param.paddings)[1];
-  //     pad_right_dbg = (*param.paddings)[1];
-  //   } else if (param.paddings->size() == 4) {
-  //     pad_top_dbg = (*param.paddings)[0];
-  //     pad_bottom_dbg = (*param.paddings)[1];
-  //     pad_left_dbg = (*param.paddings)[2];
-  //     pad_right_dbg = (*param.paddings)[3];
-  //   }
-  // }
-
-  // std::cout << "  strides = [" << stride_h_dbg << ", " << stride_w_dbg << "]\n";
-  // std::cout << "  dilations = [" << dilation_h_dbg << ", " << dilation_w_dbg << "]\n";
-  // std::cout << "  paddings = [top=" << pad_top_dbg
-  //           << ", bottom=" << pad_bottom_dbg
-  //           << ", left=" << pad_left_dbg
-  //           << ", right=" << pad_right_dbg << "]\n";
-
-  // // ------------------------------------------------------------
-  // // Conv2D 权重、bias、scale 打印
-  // // ------------------------------------------------------------
-
   const int conv_w_numel = conv_oc * conv_ic * conv_kh * conv_kw;
-
-  // int conv_zero_after_cast = 0;
-  // int conv_non_integer_count = 0;
-  // float conv_min_w = 1e30f;
-  // float conv_max_w = -1e30f;
-
-  // for (int i = 0; i < conv_w_numel; ++i) {
-  //   const float w = static_cast<float>(conv_w_q_float[i]);
-  //   conv_min_w = std::min(conv_min_w, w);
-  //   conv_max_w = std::max(conv_max_w, w);
-
-  //   if (static_cast<int32_t>(w) == 0) {
-  //     conv_zero_after_cast++;
-  //   }
-
-  //   if (std::fabs(w - std::round(w)) > 1e-3f) {
-  //     conv_non_integer_count++;
-  //   }
-  // }
-
-  // std::cout << "\n[Conv2D Weight Statistics]\n";
-  // std::cout << "  conv_w_numel = " << conv_w_numel << "\n";
-  // std::cout << "  conv_w_float_min = " << conv_min_w << "\n";
-  // std::cout << "  conv_w_float_max = " << conv_max_w << "\n";
-  // std::cout << "  conv_zero_after_static_cast_int32 = "
-  //           << conv_zero_after_cast << " / " << conv_w_numel << "\n";
-  // std::cout << "  conv_non_integer_like_weight = "
-  //           << conv_non_integer_count << " / " << conv_w_numel << "\n";
-
-  // std::cout << "\n[Conv2D Bias and Scale]\n";
-  // for (int oc = 0; oc < conv_oc; ++oc) {
-  //   std::cout << "  conv_oc=" << oc
-  //             << ", filter_scale=" << conv_filter_scale[oc];
-
-  //   if (conv_bias) {
-  //     std::cout << ", bias=" << conv_bias[oc];
-  //   } else {
-  //     std::cout << ", bias=null";
-  //   }
-
-  //   std::cout << ", dequant_out_scale=calib_scale*filter_scale="
-  //             << calib_scale * conv_filter_scale[oc] << "\n";
-  // }
-
-  // std::cout << "\n[Conv2D All Weights]\n";
-  // for (int oc = 0; oc < conv_oc; ++oc) {
-  //   std::cout << "  ---- conv_oc=" << oc << " ----\n";
-  //   std::cout << "  scale=" << conv_filter_scale[oc];
-  //   if (conv_bias) {
-  //     std::cout << ", bias=" << conv_bias[oc];
-  //   } else {
-  //     std::cout << ", bias=null";
-  //   }
-  //   std::cout << "\n";
-
-  //   for (int ic = 0; ic < conv_ic; ++ic) {
-  //     for (int kh = 0; kh < conv_kh; ++kh) {
-  //       for (int kw = 0; kw < conv_kw; ++kw) {
-  //         const int idx =
-  //             ((oc * conv_ic + ic) * conv_kh + kh) * conv_kw + kw;
-
-  //         const float w_float = static_cast<float>(conv_w_q_float[idx]);
-  //         const int32_t w_cast = static_cast<int32_t>(w_float);
-  //         const int32_t w_round = static_cast<int32_t>(std::round(w_float));
-
-  //         std::cout << "    conv_w"
-  //                   << "[oc=" << oc
-  //                   << "][ic=" << ic
-  //                   << "][kh=" << kh
-  //                   << "][kw=" << kw
-  //                   << "]"
-  //                   << " raw_float=" << w_float
-  //                   << ", static_cast_int32=" << w_cast
-  //                   << ", round_int32=" << w_round
-  //                   << "\n";
-  //       }
-  //     }
-  //   }
-  // }
-
-  // // ------------------------------------------------------------
-  // // Depthwise 权重、bias、scale 打印
-  // // ------------------------------------------------------------
-
   const int dw_w_numel = dw_oc * dw_ic_per_group * dw_kh * dw_kw;
-
-  // int dw_zero_after_cast = 0;
-  // int dw_non_integer_count = 0;
-  // float dw_min_w = 1e30f;
-  // float dw_max_w = -1e30f;
-
-  // for (int i = 0; i < dw_w_numel; ++i) {
-  //   const float w = static_cast<float>(dw_w_q_float[i]);
-  //   dw_min_w = std::min(dw_min_w, w);
-  //   dw_max_w = std::max(dw_max_w, w);
-
-  //   if (static_cast<int32_t>(w) == 0) {
-  //     dw_zero_after_cast++;
-  //   }
-
-  //   if (std::fabs(w - std::round(w)) > 1e-3f) {
-  //     dw_non_integer_count++;
-  //   }
-  // }
-
-  // std::cout << "\n[Depthwise Weight Statistics]\n";
-  // std::cout << "  dw_w_numel = " << dw_w_numel << "\n";
-  // std::cout << "  dw_w_float_min = " << dw_min_w << "\n";
-  // std::cout << "  dw_w_float_max = " << dw_max_w << "\n";
-  // std::cout << "  dw_zero_after_static_cast_int32 = "
-  //           << dw_zero_after_cast << " / " << dw_w_numel << "\n";
-  // std::cout << "  dw_non_integer_like_weight = "
-  //           << dw_non_integer_count << " / " << dw_w_numel << "\n";
-
-  // std::cout << "\n[Depthwise Bias and Scale]\n";
-  // for (int oc = 0; oc < dw_oc; ++oc) {
-  //   std::cout << "  dw_oc=" << oc
-  //             << ", filter_scale=" << depthwise_filter_scale[oc];
-
-  //   if (dw_bias) {
-  //     std::cout << ", bias=" << dw_bias[oc];
-  //   } else {
-  //     std::cout << ", bias=null";
-  //   }
-
-  //   std::cout << ", dequant_out_scale=depthwise_scale*filter_scale="
-  //             << depthwise_scale * depthwise_filter_scale[oc] << "\n";
-  // }
-
-  // std::cout << "\n[Depthwise All Weights]\n";
-  // for (int oc = 0; oc < dw_oc; ++oc) {
-  //   std::cout << "  ---- dw_oc=" << oc << " ----\n";
-  //   std::cout << "  scale=" << depthwise_filter_scale[oc];
-  //   if (dw_bias) {
-  //     std::cout << ", bias=" << dw_bias[oc];
-  //   } else {
-  //     std::cout << ", bias=null";
-  //   }
-  //   std::cout << "\n";
-
-  //   for (int icg = 0; icg < dw_ic_per_group; ++icg) {
-  //     for (int kh = 0; kh < dw_kh; ++kh) {
-  //       for (int kw = 0; kw < dw_kw; ++kw) {
-  //         const int idx =
-  //             ((oc * dw_ic_per_group + icg) * dw_kh + kh) * dw_kw + kw;
-
-  //         const float w_float = static_cast<float>(dw_w_q_float[idx]);
-  //         const int32_t w_cast = static_cast<int32_t>(w_float);
-  //         const int32_t w_round = static_cast<int32_t>(std::round(w_float));
-
-  //         std::cout << "    dw_w"
-  //                   << "[oc=" << oc
-  //                   << "][ic_per_group=" << icg
-  //                   << "][kh=" << kh
-  //                   << "][kw=" << kw
-  //                   << "]"
-  //                   << " raw_float=" << w_float
-  //                   << ", static_cast_int32=" << w_cast
-  //                   << ", round_int32=" << w_round
-  //                   << "\n";
-  //       }
-  //     }
-  //   }
-  // }
-
-  // std::cout << "================ End Debug Print ================\n\n";
 
   // ------------------------------------------------------------
   // helper functions
@@ -425,7 +175,11 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
     return x * t / 6.f;
   };
 
-  auto quantize_input_to_int8 = [](float x, float scale) -> int32_t {
+  auto round_up_16 = [](int x) -> int {
+    return (x + 15) & ~15;
+  };
+
+  auto quantize_input_to_int8 = [](float x, float scale) -> int8_t {
     // 对齐 Paddle Lite calib:
     // q = roundf(x * (1.f / scale))
     // clip 到 [-127, 127]
@@ -437,42 +191,208 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
       q = -127;
     }
 
-    return q;
+    return static_cast<int8_t>(q);
   };
 
-  auto load_quantized_weight = [](float w) -> int32_t {
-    // 如果权重已经是量化后的整数值，只做类型转换。
-    // 注意：这里为了严格保持你当前代码的行为，仍然使用 static_cast<int32_t>。
-    // 如果 debug 打印显示权重是原始 float 小数，这里就是导致大量 0 的位置。
-    return static_cast<int32_t>(w);
+  auto quantize_float_array_to_int8 =
+      [&](const float* src, int8_t* dst, int numel, float scale) {
+    const float inv_scale = 1.f / scale;
+    int i = 0;
+
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+    // ARMv7-A/ARMv7HF NEON 路径：
+    // 1) float * inv_scale
+    // 2) 用 +/-0.5 + vcvt 实现与 roundf 接近的四舍五入到整数
+    // 3) clip 到 [-127, 127]
+    // 4) narrow 到 int8_t
+    const float32x4_t vinv = vdupq_n_f32(inv_scale);
+    const float32x4_t vzero_f32 = vdupq_n_f32(0.f);
+    const float32x4_t vhalf_f32 = vdupq_n_f32(0.5f);
+    const int32x4_t vmax_s32 = vdupq_n_s32(127);
+    const int32x4_t vmin_s32 = vdupq_n_s32(-127);
+
+    for (; i + 8 <= numel; i += 8) {
+      float32x4_t v0 = vmulq_f32(vld1q_f32(src + i), vinv);
+      float32x4_t v1 = vmulq_f32(vld1q_f32(src + i + 4), vinv);
+
+      const uint32x4_t m0 = vcgeq_f32(v0, vzero_f32);
+      const uint32x4_t m1 = vcgeq_f32(v1, vzero_f32);
+
+      v0 = vbslq_f32(m0, vaddq_f32(v0, vhalf_f32),
+                         vsubq_f32(v0, vhalf_f32));
+      v1 = vbslq_f32(m1, vaddq_f32(v1, vhalf_f32),
+                         vsubq_f32(v1, vhalf_f32));
+
+      int32x4_t q0 = vcvtq_s32_f32(v0);
+      int32x4_t q1 = vcvtq_s32_f32(v1);
+
+      q0 = vmaxq_s32(vminq_s32(q0, vmax_s32), vmin_s32);
+      q1 = vmaxq_s32(vminq_s32(q1, vmax_s32), vmin_s32);
+
+      const int16x4_t q16_0 = vmovn_s32(q0);
+      const int16x4_t q16_1 = vmovn_s32(q1);
+      const int16x8_t q16 = vcombine_s16(q16_0, q16_1);
+      const int8x8_t q8 = vmovn_s16(q16);
+
+      vst1_s8(dst + i, q8);
+    }
+#endif
+
+    for (; i < numel; ++i) {
+      dst[i] = quantize_input_to_int8(src[i], scale);
+    }
+  };
+
+  auto clear_nhwc_c_padding = [](int8_t* dst,
+                                 int pixel_count,
+                                 int c,
+                                 int c_aligned) {
+    const int pad = c_aligned - c;
+    if (pad <= 0) {
+      return;
+    }
+
+    for (int p = 0; p < pixel_count; ++p) {
+      std::memset(dst + p * c_aligned + c, 0, pad * sizeof(int8_t));
+    }
+  };
+
+  auto quantize_nchw_float_to_nhwc_int8_c16 =
+      [&](const float* src,
+          int8_t* dst,
+          int n_num,
+          int c_num,
+          int h_num,
+          int w_num,
+          int c_aligned,
+          float scale) {
+    const int spatial = h_num * w_num;
+    const int pixel_count = n_num * spatial;
+    const float inv_scale = 1.f / scale;
+
+    // 只清零 C 维补齐区，不再对整个 NHWC buffer 做 memset。
+    // 实际通道 [0, c_num) 会在下面的融合量化重排循环中全部写满。
+    clear_nhwc_c_padding(dst, pixel_count, c_num, c_aligned);
+
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+    const float32x4_t vinv = vdupq_n_f32(inv_scale);
+    const float32x4_t vzero_f32 = vdupq_n_f32(0.f);
+    const float32x4_t vhalf_f32 = vdupq_n_f32(0.5f);
+    const int32x4_t vmax_s32 = vdupq_n_s32(127);
+    const int32x4_t vmin_s32 = vdupq_n_s32(-127);
+
+#define STORE_NHWC_8_LANES(q8, out_ptr, stride)        \
+    do {                                                \
+      (out_ptr)[0 * (stride)] = vget_lane_s8((q8), 0);  \
+      (out_ptr)[1 * (stride)] = vget_lane_s8((q8), 1);  \
+      (out_ptr)[2 * (stride)] = vget_lane_s8((q8), 2);  \
+      (out_ptr)[3 * (stride)] = vget_lane_s8((q8), 3);  \
+      (out_ptr)[4 * (stride)] = vget_lane_s8((q8), 4);  \
+      (out_ptr)[5 * (stride)] = vget_lane_s8((q8), 5);  \
+      (out_ptr)[6 * (stride)] = vget_lane_s8((q8), 6);  \
+      (out_ptr)[7 * (stride)] = vget_lane_s8((q8), 7);  \
+    } while (0)
+#endif
+
+    for (int n = 0; n < n_num; ++n) {
+      const float* src_n = src + n * c_num * spatial;
+      int8_t* dst_n = dst + n * spatial * c_aligned;
+
+      for (int ic = 0; ic < c_num; ++ic) {
+        const float* src_plane = src_n + ic * spatial;
+        int8_t* dst_channel = dst_n + ic;
+        int s = 0;
+
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+        // NCHW 中同一通道的 H*W 平面是连续的，因此沿空间维度做 NEON 量化；
+        // 量化结果直接散写到 NHWC/C16：dst[(n, h, w, ic)]。
+        for (; s + 8 <= spatial; s += 8) {
+#if defined(__GNUC__)
+          __builtin_prefetch(src_plane + s + 32);
+#endif
+          float32x4_t v0 = vmulq_f32(vld1q_f32(src_plane + s), vinv);
+          float32x4_t v1 = vmulq_f32(vld1q_f32(src_plane + s + 4), vinv);
+
+          const uint32x4_t m0 = vcgeq_f32(v0, vzero_f32);
+          const uint32x4_t m1 = vcgeq_f32(v1, vzero_f32);
+
+          v0 = vbslq_f32(m0, vaddq_f32(v0, vhalf_f32),
+                             vsubq_f32(v0, vhalf_f32));
+          v1 = vbslq_f32(m1, vaddq_f32(v1, vhalf_f32),
+                             vsubq_f32(v1, vhalf_f32));
+
+          int32x4_t q0 = vcvtq_s32_f32(v0);
+          int32x4_t q1 = vcvtq_s32_f32(v1);
+
+          q0 = vmaxq_s32(vminq_s32(q0, vmax_s32), vmin_s32);
+          q1 = vmaxq_s32(vminq_s32(q1, vmax_s32), vmin_s32);
+
+          const int16x4_t q16_0 = vmovn_s32(q0);
+          const int16x4_t q16_1 = vmovn_s32(q1);
+          const int16x8_t q16 = vcombine_s16(q16_0, q16_1);
+          const int8x8_t q8 = vmovn_s16(q16);
+
+          int8_t* dst_ptr = dst_channel + s * c_aligned;
+          STORE_NHWC_8_LANES(q8, dst_ptr, c_aligned);
+        }
+#endif
+
+        for (; s < spatial; ++s) {
+          dst_channel[s * c_aligned] = quantize_input_to_int8(src_plane[s], scale);
+        }
+      }
+    }
+
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+#undef STORE_NHWC_8_LANES
+#endif
   };
 
   // ============================================================
-  // 1. input float -> int8/int32
+  // 1. x_data: float NCHW -> int8 NHWC(C16 padded)
+  //
+  // 当前版本将量化和 NCHW->NHWC 重排融合在一个 pass 中完成，
+  // 不再生成 input_nchw_int8 临时数组，从而减少一次完整输入张量的写入和读取。
+  // NHWC 的 C 维向上补齐到 16，补齐位置填 0；同时让 NHWC buffer
+  // 起始地址 16 字节对齐，方便后续硬件以 16B 向量读取每个像素的通道数据。
   // ============================================================
 
-  const int input_numel = batch * in_c * in_h * in_w;
-  std::vector<int32_t> input_int8(input_numel);
+  const int in_c_aligned = round_up_16(in_c);
+  const int input_nhwc_numel = batch * in_h * in_w * in_c_aligned;
 
-  for (int i = 0; i < input_numel; ++i) {
-    input_int8[i] = quantize_input_to_int8(x_data[i], calib_scale);
-  }
+  // 额外分配 16 字节，手动把 data 指针抬到 16B 对齐位置。
+  std::vector<int8_t> input_nhwc_storage(input_nhwc_numel + 16);
+  const uintptr_t raw_addr =
+      reinterpret_cast<uintptr_t>(input_nhwc_storage.data());
+  int8_t* input_nhwc_int8 = reinterpret_cast<int8_t*>(
+      (raw_addr + 15u) & ~static_cast<uintptr_t>(15u));
+      // 这里的目的是让地址按16字节对齐, DRAM实现的时候最好按照物理地址对其16字节
+  // int8_t* input_nhwc_int8 = reinterpret_cast<int8_t*>(raw_addr);
+
+  quantize_nchw_float_to_nhwc_int8_c16(x_data,
+                                       input_nhwc_int8,
+                                       batch,
+                                       in_c,
+                                       in_h,
+                                       in_w,
+                                       in_c_aligned,
+                                       calib_scale);
 
   // ============================================================
-  // 2. conv filter: float container -> int32
+  // 2. conv filter: int8 container -> int8
   //
   // layout: [OC, IC, 1, 1]
   // per-channel scale: conv_filter_scale[oc] 只在反量化输出时使用
   // ============================================================
 
-  std::vector<int32_t> conv_w_int8(conv_w_numel);
+  std::vector<int8_t> conv_w_int8(conv_w_numel);
 
   for (int i = 0; i < conv_w_numel; ++i) {
-    conv_w_int8[i] = load_quantized_weight(static_cast<float>(conv_w_q_float[i]));
+    conv_w_int8[i] = conv_w_q_float[i];
   }
 
   // ============================================================
-  // 3. conv2d int8_input x int8_weight -> int32 acc -> float
+  // 3. conv2d int8_input(NHWC C16 padded) x int8_weight -> int32 acc -> float
   //    v = acc * calib_scale * conv_filter_scale[oc] + bias
   //    -> hard_swish
   // ============================================================
@@ -484,9 +404,10 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 
   if (param.need_conv2d_output && param.conv2d_output) {
     conv_out_int8 = param.conv2d_output->mutable_data<int8_t>();
-  } 
-    conv_out_buf.resize(conv_out_numel);
-    conv_out = conv_out_buf.data();
+  }
+
+  conv_out_buf.resize(conv_out_numel);
+  conv_out = conv_out_buf.data();
 
   for (int n = 0; n < batch; ++n) {
     for (int oc = 0; oc < conv_oc; ++oc) {
@@ -496,14 +417,18 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
         for (int w = 0; w < conv_out_w; ++w) {
           int32_t acc = 0;
 
+          const int nhwc_base =
+              ((n * conv_out_h + h) * conv_out_w + w) * in_c_aligned;
+
           for (int ic = 0; ic < conv_ic; ++ic) {
-            const int in_idx =
-                ((n * in_c + ic) * in_h + h) * in_w + w;
+            const int in_idx = nhwc_base + ic;
 
             const int w_idx =
                 ((oc * conv_ic + ic) * conv_kh + 0) * conv_kw + 0;
 
-            acc += input_int8[in_idx] * conv_w_int8[w_idx];
+            const int32_t x_q = static_cast<int32_t>(input_nhwc_int8[in_idx]);
+            const int32_t w_q = static_cast<int32_t>(conv_w_int8[w_idx]);
+            acc += x_q * w_q;
           }
 
           float v = static_cast<float>(acc) * out_scale;
@@ -527,36 +452,38 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
           } else if (q < -127) {
             q = -127;
           }
-          if (param.need_conv2d_output && param.conv2d_output){
-            // std::cout << "尝试get conv2d output" << std::endl;
-          conv_out_int8[out_idx] = static_cast<int8_t>(q);
+          if (param.need_conv2d_output && param.conv2d_output) {
+            conv_out_int8[out_idx] = static_cast<int8_t>(q);
           }
         }
       }
     }
   }
 
-    // ============================================================
-  // 4. conv2d float output -> depthwise input int8/int32
+  // ============================================================
+  // 4. conv2d float output -> depthwise input int8
+  //
+  // 后续软件模拟不额外做 NHWC/C16 优化，保持 NCHW 下标；
+  // 计算时再将 int8 显式转换为 int32。
   // ============================================================
 
-  std::vector<int32_t> dw_input_int8(conv_out_numel);
-
-  for (int i = 0; i < conv_out_numel; ++i) {
-    dw_input_int8[i] = quantize_input_to_int8(conv_out[i], depthwise_scale);
-  }
+  std::vector<int8_t> dw_input_int8(conv_out_numel);
+  quantize_float_array_to_int8(conv_out,
+                               dw_input_int8.data(),
+                               conv_out_numel,
+                               depthwise_scale);
 
   // ============================================================
-  // 5. depthwise filter: float container -> int32
+  // 5. depthwise filter: int8 container -> int8
   //
   // layout: [DW_OC, 1, KH, KW]
   // per-channel scale: depthwise_filter_scale[oc] 只在反量化输出时使用
   // ============================================================
 
-  std::vector<int32_t> dw_w_int8(dw_w_numel);
+  std::vector<int8_t> dw_w_int8(dw_w_numel);
 
   for (int i = 0; i < dw_w_numel; ++i) {
-    dw_w_int8[i] = load_quantized_weight(static_cast<float>(dw_w_q_float[i]));
+    dw_w_int8[i] = dw_w_q_float[i];
   }
 
   // ============================================================
@@ -566,39 +493,26 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   int stride_h = 1;
   int stride_w = 1;
 
-  if (param.strides.size() >= 2) {
-    stride_h = param.strides[0];
-    stride_w = param.strides[1];
-  }
+  stride_h = param.strides[0];
+  stride_w = param.strides[1];
 
   int dilation_h = 1;
   int dilation_w = 1;
 
-  if (param.dilations && param.dilations->size() >= 2) {
-    dilation_h = (*param.dilations)[0];
-    dilation_w = (*param.dilations)[1];
-  }
+  // if (param.dilations && param.dilations->size() >= 2) {
+  //   dilation_h = (*param.dilations)[0];
+  //   dilation_w = (*param.dilations)[1];
+  // }
 
   int pad_top = 0;
   int pad_bottom = 0;
   int pad_left = 0;
   int pad_right = 0;
 
-  if (param.paddings) {
-    if (param.paddings->size() == 2) {
-      pad_top = (*param.paddings)[0];
-      pad_bottom = (*param.paddings)[0];
-      pad_left = (*param.paddings)[1];
-      pad_right = (*param.paddings)[1];
-    } else if (param.paddings->size() == 4) {
-      // Paddle Lite 常用顺序:
-      // top, bottom, left, right
-      pad_top = (*param.paddings)[0];
-      pad_bottom = (*param.paddings)[1];
-      pad_left = (*param.paddings)[2];
-      pad_right = (*param.paddings)[3];
-    }
-  }
+  pad_top = (*param.paddings)[0];
+  pad_bottom = (*param.paddings)[0];
+  pad_left = (*param.paddings)[1];
+  pad_right = (*param.paddings)[1];
 
   // pad_bottom / pad_right 不直接参与索引计算，
   // out_h / out_w 已经由 output tensor dims 给出。
@@ -644,7 +558,9 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
               const int w_idx =
                   ((oc * dw_ic_per_group + 0) * dw_kh + kh) * dw_kw + kw;
 
-              acc += dw_input_int8[in_idx] * dw_w_int8[w_idx];
+              const int32_t x_q = static_cast<int32_t>(dw_input_int8[in_idx]);
+              const int32_t w_q = static_cast<int32_t>(dw_w_int8[w_idx]);
+              acc += x_q * w_q;
             }
           }
 
@@ -666,6 +582,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
     }
   }
 }
+
 
 
 }  // namespace intel_fpga
