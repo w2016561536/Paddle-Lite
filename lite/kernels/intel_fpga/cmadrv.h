@@ -25,8 +25,6 @@ namespace lite {
 namespace kernels {
 namespace intel_fpga {
 
-class LwAxiRegs;
-
 template <PrecisionType Ptype, PrecisionType OutType>
 class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
  public:
@@ -183,84 +181,13 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
     }
   };
 
-  struct HlsRegConfig {
-    bool valid{false};
-    unsigned long input_phys{0};
-    unsigned long weight_conv_phys{0};
-    unsigned long weight_dw_phys{0};
-    unsigned long bias_conv_phys{0};
-    unsigned long output_fixed_phys{0};
-    unsigned long bias_dw_phys{0};
-    unsigned long output_conv2d_phys{0};
-    unsigned long conv_scale_phys{0};
-    unsigned long dw_scale_phys{0};
-    uint32_t inv_dw_scale{0};
-    uint32_t input_hw{0};
-    uint32_t input_channels{0};
-    uint32_t out_channels{0};
-    uint32_t dw_kernel{0};
-    uint32_t dw_stride{0};
-    uint32_t dw_padding{0};
-    uint32_t enable_conv_out{0};
-    uint32_t local_groups_per_round{0};
-    uint32_t rounds{0};
-
-    void Clear() {
-      valid = false;
-      input_phys = 0;
-      weight_conv_phys = 0;
-      weight_dw_phys = 0;
-      bias_conv_phys = 0;
-      output_fixed_phys = 0;
-      bias_dw_phys = 0;
-      output_conv2d_phys = 0;
-      conv_scale_phys = 0;
-      dw_scale_phys = 0;
-      inv_dw_scale = 0;
-      input_hw = 0;
-      input_channels = 0;
-      out_channels = 0;
-      dw_kernel = 0;
-      dw_stride = 0;
-      dw_padding = 0;
-      enable_conv_out = 0;
-      local_groups_per_round = 0;
-      rounds = 0;
-    }
-
-    bool SameAs(const HlsRegConfig& other) const {
-      return valid && other.valid &&
-             input_phys == other.input_phys &&
-             weight_conv_phys == other.weight_conv_phys &&
-             weight_dw_phys == other.weight_dw_phys &&
-             bias_conv_phys == other.bias_conv_phys &&
-             output_fixed_phys == other.output_fixed_phys &&
-             bias_dw_phys == other.bias_dw_phys &&
-             output_conv2d_phys == other.output_conv2d_phys &&
-             conv_scale_phys == other.conv_scale_phys &&
-             dw_scale_phys == other.dw_scale_phys &&
-             inv_dw_scale == other.inv_dw_scale &&
-             input_hw == other.input_hw &&
-             input_channels == other.input_channels &&
-             out_channels == other.out_channels &&
-             dw_kernel == other.dw_kernel &&
-             dw_stride == other.dw_stride &&
-             dw_padding == other.dw_padding &&
-             enable_conv_out == other.enable_conv_out &&
-             local_groups_per_round == other.local_groups_per_round &&
-             rounds == other.rounds;
-    }
-  };
   void ReleasePersistentCma();
 
   using param_t = operators::ConvParam;
   PackedStaticData packed_static_;
   PersistentCmaData cma_runtime_;
-  HlsRegConfig reg_config_;
   std::vector<uint8_t> input_pack_cache_;
-  std::vector<uint32_t> output_fixed_cache_;
   std::vector<uint32_t> conv2d_out_cache_;
-  LwAxiRegs* regs_{nullptr};
   std::unique_ptr<KernelContext> arm_cxt_{nullptr};
   KernelLite<TARGET(kARM), Ptype>* impl_{nullptr};
 };

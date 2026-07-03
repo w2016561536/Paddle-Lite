@@ -106,7 +106,7 @@ readonly THIRDPARTY_TAR=third-party-91a9ab3.tar.gz
 readonly workspace=$PWD/$(dirname $0)/../../
 # basic options for linux compiling.
 readonly CMAKE_COMMON_OPTIONS="-DWITH_LITE=ON \
-                            -DCMAKE_BUILD_TYPE=Debug \
+                            -DCMAKE_BUILD_TYPE=Release \
                             -DWITH_MKLDNN=OFF \
                             -DWITH_TESTING=OFF"
 
