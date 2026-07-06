@@ -30,16 +30,16 @@ class LwAxiRegs;
 template <PrecisionType Ptype, PrecisionType OutType>
 class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
  public:
-  virtual void PrepareForRun();
+  void PrepareForRun() override;
 
-  virtual void ReInitWhenNeeded() {
+  void ReInitWhenNeeded() override {
     // CHECK(impl_);
     // impl_->ReInitWhenNeeded();
   }
 
-  virtual void Run();
+  void Run() override;
 
-  virtual ~CalibConv2dCompute();
+  ~CalibConv2dCompute() override;
 
  private:
   struct PackedStaticData {
@@ -260,6 +260,9 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
   std::vector<uint8_t> input_pack_cache_;
   std::vector<uint32_t> output_fixed_cache_;
   std::vector<uint32_t> conv2d_out_cache_;
+  size_t input_pack_cache_bytes_{0};
+  size_t output_fixed_cache_words_{0};
+  size_t conv2d_out_cache_words_{0};
   LwAxiRegs* regs_{nullptr};
   std::unique_ptr<KernelContext> arm_cxt_{nullptr};
   KernelLite<TARGET(kARM), Ptype>* impl_{nullptr};
