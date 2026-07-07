@@ -195,6 +195,7 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
     unsigned long conv_scale_phys{0};
     unsigned long dw_scale_phys{0};
     uint32_t inv_dw_scale{0};
+    uint32_t inv_output_scale{0};
     uint32_t input_hw{0};
     uint32_t input_channels{0};
     uint32_t out_channels{0};
@@ -204,6 +205,7 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
     uint32_t enable_conv_out{0};
     uint32_t local_groups_per_round{0};
     uint32_t rounds{0};
+    uint32_t quantize_output{0};
 
     void Clear() {
       valid = false;
@@ -217,6 +219,7 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
       conv_scale_phys = 0;
       dw_scale_phys = 0;
       inv_dw_scale = 0;
+      inv_output_scale = 0;
       input_hw = 0;
       input_channels = 0;
       out_channels = 0;
@@ -226,6 +229,7 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
       enable_conv_out = 0;
       local_groups_per_round = 0;
       rounds = 0;
+      quantize_output = 0;
     }
 
     bool SameAs(const HlsRegConfig& other) const {
@@ -240,6 +244,7 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
              conv_scale_phys == other.conv_scale_phys &&
              dw_scale_phys == other.dw_scale_phys &&
              inv_dw_scale == other.inv_dw_scale &&
+             inv_output_scale == other.inv_output_scale &&
              input_hw == other.input_hw &&
              input_channels == other.input_channels &&
              out_channels == other.out_channels &&
@@ -248,7 +253,8 @@ class CalibConv2dCompute : public KernelLite<TARGET(kIntelFPGA), Ptype> {
              dw_padding == other.dw_padding &&
              enable_conv_out == other.enable_conv_out &&
              local_groups_per_round == other.local_groups_per_round &&
-             rounds == other.rounds;
+             rounds == other.rounds &&
+             quantize_output == other.quantize_output;
     }
   };
   void ReleasePersistentCma();

@@ -1,5 +1,5 @@
 // Copyright (c) 2019 PaddlePaddle Authors. All Rights Reserved.
-// Modified: calib + NCHW->NHWC(C16) on CPU, conv2d/hardswish/depthwise/hardswish on FPGA HLS IP.
+// Modified: int8 path keeps quant/dequant on FPGA; CPU only repacks NCHW <-> FPGA C16 layout.
 // No C++ exceptions are used in this version.
 
 #include "lite/kernels/intel_fpga/calib_conv2d.h"
@@ -14,6 +14,7 @@
 #include <cstring>
 #include <iostream>
 #include <limits>
+#include <type_traits>
 #include <vector>
 
 #include <fcntl.h>
@@ -109,7 +110,7 @@ namespace intel_fpga {
 #endif
 
 #ifndef CALIB_CONV2D_ENABLE_TIMING_LOG
-#define CALIB_CONV2D_ENABLE_TIMING_LOG 0
+#define CALIB_CONV2D_ENABLE_TIMING_LOG 1
 #endif
 
 #ifndef CALIB_CONV2D_OMP_MIN_WORK
@@ -120,6 +121,9 @@ namespace intel_fpga {
 #define CALIB_CONV2D_OMP_SPATIAL_TILE 512
 #endif
 
+#ifndef CALIB_CONV2D_RELEASE_CMA_AFTER_RUN
+#define CALIB_CONV2D_RELEASE_CMA_AFTER_RUN 0
+#endif
 #ifndef CALIB_CONV2D_CACHE_REG_WRITES
 #define CALIB_CONV2D_CACHE_REG_WRITES 0
 #endif
@@ -185,6 +189,8 @@ static const uint32_t REG_DW_PADDING = 0xac;
 static const uint32_t REG_ENABLE_CONV_OUT = 0xb4;
 static const uint32_t REG_LOCAL_GROUPS_PER_ROUND = 0xbc;
 static const uint32_t REG_ROUNDS = 0xc4;
+static const uint32_t REG_INV_OUTPUT_SCALE = 0xcc;
+static const uint32_t REG_QUANTIZE_OUTPUT = 0xd4;
 
 // HLS fixed_t = ap_fixed<32, 10, AP_RND, AP_SAT>, i.e. Q10.22.
 static const int FIXED_TOTAL_BITS = 32;
@@ -727,6 +733,76 @@ static inline void StoreQuantizedSpatial8x16Neon(const float* src_nchw,
                           q8, q9, q10, q11, q12, q13, q14, q15,
                           dst, dst_stride);
 }
+
+static inline uint8x8_t LoadInt8Channel8Neon(const int8_t* src_nchw,
+                                             int spatial,
+                                             int channel,
+                                             int c,
+                                             int s) {
+  if (channel >= c) {
+    return vdup_n_u8(0);
+  }
+  const int8_t* src = src_nchw + static_cast<size_t>(channel) * spatial + s;
+  return vld1_u8(reinterpret_cast<const uint8_t*>(src));
+}
+
+static inline uint8x8_t LoadInt8Channel8NoPadNeon(const int8_t* src_nchw,
+                                                  int spatial,
+                                                  int channel,
+                                                  int s) {
+  const int8_t* src = src_nchw + static_cast<size_t>(channel) * spatial + s;
+  return vld1_u8(reinterpret_cast<const uint8_t*>(src));
+}
+
+template <bool Padded>
+static inline void StoreInt8Spatial8x16Neon(const int8_t* src_nchw,
+                                            int spatial,
+                                            int c,
+                                            int icb,
+                                            int s,
+                                            uint8_t* dst,
+                                            int dst_stride) {
+  uint8x8_t q0, q1, q2, q3, q4, q5, q6, q7;
+  uint8x8_t q8, q9, q10, q11, q12, q13, q14, q15;
+  if (Padded) {
+    q0 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 0, c, s);
+    q1 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 1, c, s);
+    q2 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 2, c, s);
+    q3 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 3, c, s);
+    q4 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 4, c, s);
+    q5 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 5, c, s);
+    q6 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 6, c, s);
+    q7 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 7, c, s);
+    q8 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 8, c, s);
+    q9 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 9, c, s);
+    q10 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 10, c, s);
+    q11 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 11, c, s);
+    q12 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 12, c, s);
+    q13 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 13, c, s);
+    q14 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 14, c, s);
+    q15 = LoadInt8Channel8Neon(src_nchw, spatial, icb + 15, c, s);
+  } else {
+    q0 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 0, s);
+    q1 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 1, s);
+    q2 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 2, s);
+    q3 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 3, s);
+    q4 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 4, s);
+    q5 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 5, s);
+    q6 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 6, s);
+    q7 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 7, s);
+    q8 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 8, s);
+    q9 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 9, s);
+    q10 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 10, s);
+    q11 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 11, s);
+    q12 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 12, s);
+    q13 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 13, s);
+    q14 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 14, s);
+    q15 = LoadInt8Channel8NoPadNeon(src_nchw, spatial, icb + 15, s);
+  }
+  StoreTransposed8x16Neon(q0, q1, q2, q3, q4, q5, q6, q7,
+                          q8, q9, q10, q11, q12, q13, q14, q15,
+                          dst, dst_stride);
+}
 #endif
 
 template <bool Padded>
@@ -1160,15 +1236,12 @@ static void PackConv1x1WeightsOC_ICB16(const int8_t* src_oc_ic_1_1,
                                        int ic,
                                        int ic_aligned,
                                        uint8_t* dst) {
-  const int ic_blocks = ic_aligned >> 4;
-  CalibFastZero(dst, static_cast<size_t>(oc) * ic_blocks * 16);
+  const size_t dst_oc_stride = static_cast<size_t>(ic_aligned);
+  CalibFastZero(dst, static_cast<size_t>(oc) * dst_oc_stride);
   for (int o = 0; o < oc; ++o) {
-    for (int i = 0; i < ic; ++i) {
-      const int icb = i >> 4;
-      const int lane = i & 15;
-      dst[(o * ic_blocks + icb) * 16 + lane] =
-          static_cast<uint8_t>(src_oc_ic_1_1[o * ic + i]);
-    }
+    CalibFastCopy(dst + static_cast<size_t>(o) * dst_oc_stride,
+                  src_oc_ic_1_1 + static_cast<size_t>(o) * ic,
+                  static_cast<size_t>(ic));
   }
 }
 
@@ -1306,6 +1379,162 @@ static void QuantizeNCHWToNHWCC16Float(const float* src_nchw,
 #endif
 }
 
+static void PackInt8NCHWToNHWCC16(const int8_t* src_nchw,
+                                  int c,
+                                  int h,
+                                  int w,
+                                  int c_aligned,
+                                  uint8_t* dst_nhwc) {
+  if (src_nchw == NULL || dst_nhwc == NULL) return;
+  const int spatial = h * w;
+  const int c_blocks = c_aligned >> 4;
+#if CALIB_CONV2D_CLEAR_INPUT_PACK
+  CalibFastZero(dst_nhwc, static_cast<size_t>(spatial) * c_aligned);
+#endif
+  const int spatial_tile = CALIB_CONV2D_OMP_SPATIAL_TILE > 0
+                               ? CALIB_CONV2D_OMP_SPATIAL_TILE
+                               : 512;
+  const int spatial_tiles = (spatial + spatial_tile - 1) / spatial_tile;
+#if CALIB_CONV2D_USE_OPENMP
+#pragma omp parallel for collapse(2) schedule(static) if (c_blocks * spatial >= CALIB_CONV2D_OMP_MIN_WORK)
+#endif
+  for (int icb_idx = 0; icb_idx < c_blocks; ++icb_idx) {
+    for (int tile = 0; tile < spatial_tiles; ++tile) {
+      const int icb = icb_idx << 4;
+      const bool padded = icb + 16 > c;
+      const int valid_lanes = padded ? std::min(16, c - icb) : 16;
+      int s = tile * spatial_tile;
+      const int s_end = std::min(spatial, s + spatial_tile);
+#if CALIB_CONV2D_HAS_NEON
+      if (padded) {
+        for (; s + 8 <= s_end; s += 8) {
+          StoreInt8Spatial8x16Neon<true>(
+              src_nchw,
+              spatial,
+              c,
+              icb,
+              s,
+              dst_nhwc + static_cast<size_t>(s) * c_aligned + icb,
+              c_aligned);
+        }
+      } else {
+        for (; s + 8 <= s_end; s += 8) {
+          StoreInt8Spatial8x16Neon<false>(
+              src_nchw,
+              spatial,
+              c,
+              icb,
+              s,
+              dst_nhwc + static_cast<size_t>(s) * c_aligned + icb,
+              c_aligned);
+        }
+      }
+#endif
+      for (; s < s_end; ++s) {
+        uint8_t* dst = dst_nhwc + static_cast<size_t>(s) * c_aligned + icb;
+        for (int lane = 0; lane < valid_lanes; ++lane) {
+          const int channel = icb + lane;
+          dst[lane] = static_cast<uint8_t>(
+              src_nchw[static_cast<size_t>(channel) * spatial + s]);
+        }
+        for (int lane = valid_lanes; lane < 16; ++lane) {
+          dst[lane] = 0;
+        }
+      }
+    }
+  }
+}
+
+template <typename T>
+static void PackInputNCHWToNHWCC16(const T* src_nchw,
+                                   int c,
+                                   int h,
+                                   int w,
+                                   int c_aligned,
+                                   float calib_scale,
+                                   uint8_t* dst_nhwc) {
+  QuantizeNCHWToNHWCC16Float(src_nchw, c, h, w, c_aligned, calib_scale, dst_nhwc);
+}
+
+template <>
+void PackInputNCHWToNHWCC16<int8_t>(const int8_t* src_nchw,
+                                    int c,
+                                    int h,
+                                    int w,
+                                    int c_aligned,
+                                    float calib_scale,
+                                    uint8_t* dst_nhwc) {
+  (void)calib_scale;
+  PackInt8NCHWToNHWCC16(src_nchw, c, h, w, c_aligned, dst_nhwc);
+}
+
+static void UnpackOutputI8G4CompactToNCHWInt8(const uint32_t* src,
+                                              int8_t* dst,
+                                              int c,
+                                              int h,
+                                              int w) {
+  if (src == NULL || dst == NULL) return;
+  const int groups = (c + 3) >> 2;
+  const int spatial = h * w;
+  const int row_words = RoundUp4(w);
+#if CALIB_CONV2D_USE_OPENMP
+#pragma omp parallel for collapse(2) schedule(static) if (groups * spatial >= CALIB_CONV2D_OMP_MIN_WORK)
+#endif
+  for (int g = 0; g < groups; ++g) {
+    for (int y = 0; y < h; ++y) {
+      const int oc0 = (g << 2) + 0;
+      const int oc1 = (g << 2) + 1;
+      const int oc2 = (g << 2) + 2;
+      const int oc3 = (g << 2) + 3;
+      int8_t* dst0 = dst + static_cast<size_t>(oc0) * spatial + static_cast<size_t>(y) * w;
+      int8_t* dst1 = (oc1 < c) ? dst + static_cast<size_t>(oc1) * spatial + static_cast<size_t>(y) * w : NULL;
+      int8_t* dst2 = (oc2 < c) ? dst + static_cast<size_t>(oc2) * spatial + static_cast<size_t>(y) * w : NULL;
+      int8_t* dst3 = (oc3 < c) ? dst + static_cast<size_t>(oc3) * spatial + static_cast<size_t>(y) * w : NULL;
+      const uint32_t* src_row = src + (static_cast<size_t>(g) * h + y) * row_words;
+      int x = 0;
+#if CALIB_CONV2D_HAS_NEON
+      for (; x + 16 <= w; x += 16) {
+        const uint8x16x4_t lanes =
+            vld4q_u8(reinterpret_cast<const uint8_t*>(src_row + x));
+        vst1q_u8(reinterpret_cast<uint8_t*>(dst0 + x), lanes.val[0]);
+        if (dst1 != NULL) {
+          vst1q_u8(reinterpret_cast<uint8_t*>(dst1 + x), lanes.val[1]);
+        }
+        if (dst2 != NULL) {
+          vst1q_u8(reinterpret_cast<uint8_t*>(dst2 + x), lanes.val[2]);
+        }
+        if (dst3 != NULL) {
+          vst1q_u8(reinterpret_cast<uint8_t*>(dst3 + x), lanes.val[3]);
+        }
+      }
+#endif
+      for (; x < w; ++x) {
+        const uint32_t word = src_row[x];
+        dst0[x] = static_cast<int8_t>(word & 0xffu);
+        if (dst1 != NULL) dst1[x] = static_cast<int8_t>((word >> 8) & 0xffu);
+        if (dst2 != NULL) dst2[x] = static_cast<int8_t>((word >> 16) & 0xffu);
+        if (dst3 != NULL) dst3[x] = static_cast<int8_t>((word >> 24) & 0xffu);
+      }
+    }
+  }
+}
+template <typename T>
+static void CopyFpgaOutputToNCHW(const uint32_t* raw,
+                                 T* dst,
+                                 int c,
+                                 int h,
+                                 int w) {
+  ConvertFloatGHWC4RawToNCHWFloatArray(raw, dst, c, h, w);
+}
+
+template <>
+void CopyFpgaOutputToNCHW<int8_t>(const uint32_t* raw,
+                                  int8_t* dst,
+                                  int c,
+                                  int h,
+                                  int w) {
+  UnpackOutputI8G4CompactToNCHWInt8(raw, dst, c, h, w);
+}
 static bool AllEqualPadding(const std::vector<int>& paddings, int* pad_out) {
   if (pad_out == NULL) return false;
   if (paddings.empty()) {
@@ -1323,8 +1552,8 @@ static bool AllEqualPadding(const std::vector<int>& paddings, int* pad_out) {
 // ============================================================================
 // 3. Paddle kernel
 // ============================================================================
-template <>
-void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::ReleasePersistentCma() {
+template <PrecisionType Ptype, PrecisionType OutType>
+void CalibConv2dCompute<Ptype, OutType>::ReleasePersistentCma() {
   if (cma_runtime_.map != NULL) {
     munmap(cma_runtime_.map, cma_runtime_.size);
   }
@@ -1349,15 +1578,15 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::ReleasePersistent
   reg_config_.Clear();
 }
 
-template <>
-CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::~CalibConv2dCompute() {
+template <PrecisionType Ptype, PrecisionType OutType>
+CalibConv2dCompute<Ptype, OutType>::~CalibConv2dCompute() {
   delete regs_;
   regs_ = NULL;
   ReleasePersistentCma();
 }
 
-template <>
-void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
+template <PrecisionType Ptype, PrecisionType OutType>
+void CalibConv2dCompute<Ptype, OutType>::PrepareForRun() {
   typedef float T;
 #if CALIB_CONV2D_ENABLE_VERBOSE_LOG
   const uint64_t prepare_start_ns = CalibNowNs();
@@ -1366,10 +1595,10 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
   reg_config_.Clear();
 
   auto& param = this->template Param<operators::ConvParam>();
-  const int8_t* conv_w_q = param.filter ? param.filter->data<int8_t>() : NULL;
-  const int8_t* dw_w_q = param.depthwise_filter ? param.depthwise_filter->data<int8_t>() : NULL;
-  const T* conv_bias = param.bias ? param.bias->data<T>() : NULL;
-  const T* dw_bias = param.depthwise_bias ? param.depthwise_bias->data<T>() : NULL;
+  const int8_t* conv_w_q = param.filter ? param.filter->template data<int8_t>() : NULL;
+  const int8_t* dw_w_q = param.depthwise_filter ? param.depthwise_filter->template data<int8_t>() : NULL;
+  const T* conv_bias = param.bias ? param.bias->template data<T>() : NULL;
+  const T* dw_bias = param.depthwise_bias ? param.depthwise_bias->template data<T>() : NULL;
 
   if (param.x == NULL || param.output == NULL ||
       param.filter == NULL || param.depthwise_filter == NULL ||
@@ -1480,18 +1709,16 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
   packed_static_.valid = true;
 
   const size_t input_bytes = static_cast<size_t>(in_h) * in_w * in_c_aligned;
-  const size_t output_fixed_words =
-      static_cast<size_t>((out_c + 3) >> 2) * out_h * out_w * 4;
+  const size_t output_fixed_groups = static_cast<size_t>((out_c + 3) >> 2);
+  const size_t output_fixed_row_words = static_cast<size_t>(RoundUp4(out_w));
+  const size_t output_fixed_words = output_fixed_groups * out_h * output_fixed_row_words;
   const size_t output_fixed_bytes = output_fixed_words * sizeof(uint32_t);
   const size_t conv2d_out_count = static_cast<size_t>(conv_oc) * in_h * in_w;
   const size_t conv2d_out_groups = static_cast<size_t>((conv_oc + 3) >> 2);
   const size_t conv2d_out_words = conv2d_out_groups * in_h * in_w;
   const size_t conv2d_out_bytes = conv2d_out_words * sizeof(uint32_t);
-  const size_t persist_feature_elems =
-      std::max(MAX_PERSIST_FEATURE_ELEMS, MAX_PERSIST_FEATURE_HINT_ELEMS);
-  const size_t input_capacity_bytes = std::max(input_bytes, persist_feature_elems);
-  const size_t output_fixed_capacity_bytes =
-      std::max(output_fixed_bytes, persist_feature_elems * sizeof(uint32_t));
+  const size_t input_capacity_bytes = input_bytes;
+  const size_t output_fixed_capacity_bytes = output_fixed_bytes;
   const size_t conv2d_out_capacity_bytes = conv2d_out_bytes;
 
   size_t total_bytes = 0;
@@ -1505,9 +1732,10 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
   total_bytes = AlignUp(total_bytes, 64) + AlignUp(packed_static_.conv_scale_bytes, 64);
   total_bytes = AlignUp(total_bytes, 64) + AlignUp(packed_static_.depthwise_scale_bytes, 64);
 
+  const size_t alloc_bytes = AlignUp(total_bytes, 4096);
   const bool need_new_cma =
       !cma_runtime_.valid ||
-      cma_runtime_.size < total_bytes + 4096 ||
+      cma_runtime_.size < alloc_bytes ||
       cma_runtime_.input_capacity_bytes < input_capacity_bytes ||
       cma_runtime_.output_fixed_capacity_bytes < output_fixed_capacity_bytes ||
       cma_runtime_.conv2d_out_capacity_bytes < conv2d_out_capacity_bytes;
@@ -1524,7 +1752,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
 
     cma_mblk_s blk;
     std::memset(&blk, 0, sizeof(blk));
-    blk.size = total_bytes + 4096;
+    blk.size = alloc_bytes;
     if (ioctl(cma_runtime_.fd, CMA_IOCTL_MAKE(CMA_CMD_MGET), &blk) < 0) {
       FPGA_CALIB_LOG_ERROR("PrepareForRun CMA alloc failed, errno=" << errno << ", " << strerror(errno));
       close(cma_runtime_.fd);
@@ -1651,9 +1879,10 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::PrepareForRun() {
 #endif
 }
 
-template <>
-void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
-  typedef float T;
+template <PrecisionType Ptype, PrecisionType OutType>
+void CalibConv2dCompute<Ptype, OutType>::Run() {
+  typedef int8_t T;
+  const bool int8_io = true;
 #if CALIB_CONV2D_ENABLE_TIMING_LOG
   const uint64_t run_start_ns = CalibNowNs();
 #endif
@@ -1664,10 +1893,9 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 #endif
   auto& param = this->template Param<operators::ConvParam>();
 
-  const T* x_data = param.x->data<T>();
-  T* out_data = param.output->mutable_data<T>();
-  const int8_t* conv_w_q = param.filter ? param.filter->data<int8_t>() : NULL;
-  const T* conv_bias = param.bias ? param.bias->data<T>() : NULL;
+  const T* x_data = param.x->template data<T>();
+  T* out_data = param.output->template mutable_data<T>();
+  const int8_t* conv_w_q = param.filter ? param.filter->template data<int8_t>() : NULL;
 
   auto x_dims = param.x->dims();
   auto conv_w_dims = param.filter->dims();
@@ -1802,7 +2030,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   const bool enable_conv2d_out = param.need_conv2d_output && param.conv2d_output;
   int8_t* conv2d_out_tensor = NULL;
   if (enable_conv2d_out) {
-    conv2d_out_tensor = param.conv2d_output->mutable_data<int8_t>();
+    conv2d_out_tensor = param.conv2d_output->template mutable_data<int8_t>();
     if (conv2d_out_tensor == NULL) {
       FPGA_CALIB_LOG_ERROR("conv2d_output mutable data is null");
       return;
@@ -1810,8 +2038,9 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   }
 
   const size_t input_bytes = static_cast<size_t>(in_h) * in_w * in_c_aligned;
-  const size_t output_fixed_words =
-      static_cast<size_t>((out_c + 3) >> 2) * out_h * out_w * 4;
+  const size_t output_fixed_groups = static_cast<size_t>((out_c + 3) >> 2);
+  const size_t output_fixed_row_words = static_cast<size_t>(RoundUp4(out_w));
+  const size_t output_fixed_words = output_fixed_groups * out_h * output_fixed_row_words;
   const size_t output_fixed_bytes = output_fixed_words * sizeof(uint32_t);
   const size_t conv2d_out_count = static_cast<size_t>(conv_oc) * in_h * in_w;
   const size_t conv2d_out_groups = static_cast<size_t>((conv_oc + 3) >> 2);
@@ -1877,6 +2106,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   next_reg.conv_scale_phys = cma_runtime_.phys + cma_runtime_.off_conv_scale;
   next_reg.dw_scale_phys = cma_runtime_.phys + cma_runtime_.off_dw_scale;
   next_reg.inv_dw_scale = FixedRawFromFloat(1.f / depthwise_scale);
+  next_reg.inv_output_scale = int8_io ? FixedRawFromFloat(1.f / calib_scale) : 0u;
   next_reg.input_hw = static_cast<uint32_t>(in_h);
   next_reg.input_channels = static_cast<uint32_t>(in_c);
   next_reg.out_channels = static_cast<uint32_t>(conv_oc);
@@ -1886,6 +2116,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
   next_reg.enable_conv_out = enable_conv2d_out ? 1u : 0u;
   next_reg.local_groups_per_round = static_cast<uint32_t>(local_groups_per_round);
   next_reg.rounds = static_cast<uint32_t>(rounds);
+  next_reg.quantize_output = int8_io ? 1u : 0u;
 
   bool reg_ok = true;
 #if CALIB_CONV2D_CACHE_REG_WRITES
@@ -1903,6 +2134,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
     reg_ok = reg_ok && regs.WriteAddr(REG_DW_SCALE_L, REG_DW_SCALE_H, next_reg.dw_scale_phys);
 
     reg_ok = reg_ok && regs.Write32(REG_INV_DW_SCALE, next_reg.inv_dw_scale);
+    reg_ok = reg_ok && regs.Write32(REG_INV_OUTPUT_SCALE, next_reg.inv_output_scale);
     reg_ok = reg_ok && regs.Write32(REG_INPUT_HW, next_reg.input_hw);
     reg_ok = reg_ok && regs.Write32(REG_INPUT_CHANNELS, next_reg.input_channels);
     reg_ok = reg_ok && regs.Write32(REG_OUT_CHANNELS, next_reg.out_channels);
@@ -1912,6 +2144,7 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
     reg_ok = reg_ok && regs.Write32(REG_ENABLE_CONV_OUT, next_reg.enable_conv_out);
     reg_ok = reg_ok && regs.Write32(REG_LOCAL_GROUPS_PER_ROUND, next_reg.local_groups_per_round);
     reg_ok = reg_ok && regs.Write32(REG_ROUNDS, next_reg.rounds);
+    reg_ok = reg_ok && regs.Write32(REG_QUANTIZE_OUTPUT, next_reg.quantize_output);
 
     reg_ok = reg_ok && regs.WriteAddr(REG_INPUT_L, REG_INPUT_H, next_reg.input_phys);
     reg_ok = reg_ok && regs.WriteAddr(REG_OUTPUT_FIXED_L, REG_OUTPUT_FIXED_H, next_reg.output_fixed_phys);
@@ -1978,13 +2211,13 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 #else
       uint8_t* input_pack_dst = cma_base + cma_runtime_.off_input;
 #endif
-      QuantizeNCHWToNHWCC16Float(x_n,
-                                 in_c,
-                                 in_h,
-                                 in_w,
-                                 in_c_aligned,
-                                 calib_scale,
-                                 input_pack_dst);
+      PackInputNCHWToNHWCC16<T>(x_n,
+                                   in_c,
+                                   in_h,
+                                   in_w,
+                                   in_c_aligned,
+                                   calib_scale,
+                                   input_pack_dst);
 #if CALIB_CONV2D_USE_CACHED_INPUT_STAGING && !CALIB_CONV2D_PACK_INPUT_DIRECT_TO_CMA
       CalibFastCopy(cma_base + cma_runtime_.off_input, input_pack_cache_.data(), input_bytes);
 #endif
@@ -2033,10 +2266,17 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 #else
       const uint32_t* raw_out = reinterpret_cast<const uint32_t*>(cma_base + cma_runtime_.off_output_fixed);
 #endif
-      ConvertFloatGHWC4RawToNCHWFloatArray(raw_out, out_n, out_c, out_h, out_w);
+      CopyFpgaOutputToNCHW<T>(raw_out, out_n, out_c, out_h, out_w);
     }
 
   }
+
+#if CALIB_CONV2D_RELEASE_CMA_AFTER_RUN
+  {
+    ScopedCalibTimer timer(&timing.cleanup_ns);
+    ReleasePersistentCma();
+  }
+#endif
 
 #if CALIB_CONV2D_ENABLE_TIMING_LOG
   timing.Print(batch, CalibNowNs() - run_start_ns);
@@ -2049,11 +2289,25 @@ void CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)>::Run() {
 }  // namespace paddle
 
 typedef paddle::lite::kernels::intel_fpga::CalibConv2dCompute<PRECISION(kFloat), PRECISION(kFloat)> ConvFp32;
+typedef paddle::lite::kernels::intel_fpga::CalibConv2dCompute<PRECISION(kInt8), PRECISION(kInt8)> ConvInt8;
 
 REGISTER_LITE_KERNEL(calib_conv2d, kIntelFPGA, kFloat, kNCHW, ConvFp32, def)
     .BindInput("Input", {LiteType::GetTensorTy(TARGET(kARM))})
-    .BindInput("Bias", {LiteType::GetTensorTy(TARGET(kARM))})
-    .BindInput("Filter", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Filter_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Bias_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Filter_Depthwise_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Bias_Depthwise_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindOutput("Output", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindOutput("Output_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindPaddleOpVersion("calib_conv2d", 1)
+    .Finalize();
+
+REGISTER_LITE_KERNEL(calib_conv2d, kIntelFPGA, kInt8, kNCHW, ConvInt8, def)
+    .BindInput("Input", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Filter_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Bias_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Filter_Depthwise_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
+    .BindInput("Bias_Depthwise_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindOutput("Output", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindOutput("Output_Conv2d", {LiteType::GetTensorTy(TARGET(kARM))})
     .BindPaddleOpVersion("calib_conv2d", 1)
